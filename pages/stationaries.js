@@ -28,16 +28,23 @@ function Stationaries() {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const prog = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
 
         setProgress(prog);
       },
       (err) => {
         console.log(err);
+        alert(err.message);
+        setProgress("");
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
+          {
+            console.log("File available at", downloadURL);
+            
+          }
         });
       }
     );
@@ -83,7 +90,7 @@ function Stationaries() {
             <input
               type="submit"
               className="border border-black hover:shadow-md rounded-lg"
-              value="Please submit"
+              value="Submit"
             />
           </form>
 
