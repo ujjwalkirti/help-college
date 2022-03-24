@@ -2,26 +2,35 @@ export default function handler(req, res) {
   const data = [
     {
       name: "Previous Year Questions",
-      description: "",
+      description:
+        "You will get all the previous year question papers of mid semester and end semester examinations for all the branches here!",
       url: "/pyq",
       backgroundImg: "",
     },
-    { name: "Academic Calender", description: "", backgroundImg: "", url: "" },
+    {
+      name: "Academic Calender",
+      description: "Academic calender for the academic year 2021-22",
+      backgroundImg: "",
+      url: "",
+    },
     {
       name: "Old Books and other Stationaries for sale",
-      description: "",
+      description:
+        "This is the only place where you can sell and buy second-hand stationary items at price of your convinience",
       backgroundImg: "",
       url: "/stationaries",
     },
     {
       name: "Vehicles for sale",
-      description: "",
+      description:
+        "Are you looking forward to sell your bike, or buy a new one? Then this is the perfect place for you!",
       backgroundImg: "",
       url: "/commute",
     },
     {
       name: "Hostel and Student chapter reviews",
-      description: "",
+      description:
+        "SVNIT, Surat has a dozen of student chapters which makes it quite difficult for any newbie or fresher to decide which club or chapter is best suited for him. But worry no more, as here you will get to read about first hand reviews about not only student chapters and clubs but even hostels and other facilities provided by the institute. ",
       backgroundImg: "",
       url: "/reviews",
     },
