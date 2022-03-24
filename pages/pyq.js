@@ -5,8 +5,7 @@ function Pyq() {
   return (
     <div>
       <Navbar />
-      <div id="overlays"></div>
-      {/* <Courses_Card /> */}
+      
     </div>
   );
 }

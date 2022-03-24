@@ -1,5 +1,5 @@
 import React from "react";
-import { app } from "../components/Firebase/Firebase";
+import { app, db } from "../components/Firebase/Firebase";
 import {
   ref,
   uploadBytesResumable,
@@ -7,11 +7,40 @@ import {
   getStorage,
 } from "firebase/storage";
 import Progress_bar from "../components/Progress_bar";
+import { addDoc, collection } from "firebase/firestore";
+import { useSession, signIn } from "next-auth/react";
+import axios from "axios";
+import Stationary_Card from "../components/Stationary_Card";
+import Navbar from "../components/Navbar";
 
 function Stationaries() {
   const [wantsToBuy, setWantsToBuy] = React.useState(false);
   const [showForm, setShowForm] = React.useState(false);
+  const [nameOfProduct, setNameOfProduct] = React.useState("");
+  const [productsList, setProductList] = React.useState([]);
+  const [imageOfProduct, setImageOfProduct] = React.useState("");
   const [progress, setProgress] = React.useState("");
+
+  const { data: session } = useSession();
+
+  //fetching all the stationaries uploaded for sale
+  React.useEffect(() => {
+    if (wantsToBuy) {
+      if (productsList !== []) {
+        axios
+          .get("/api/getStationaries")
+          .then(function (response) {
+            // handle success
+            // console.log(response.data);
+            setProductList(response.data);
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          });
+      }
+    }
+  }, [wantsToBuy]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,68 +69,117 @@ function Stationaries() {
         setProgress("");
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           {
-            console.log("File available at", downloadURL);
-            
+            // console.log("File available at", downloadURL);
+
+            addDoc(collection(db, "stationaries"), {
+              name: nameOfProduct,
+              owner: session.user.email,
+              image: downloadURL,
+            })
+              .then((doc) => {
+                console.log(doc);
+                setNameOfProduct("");
+                alert("Your stationary item uploaded successfully");
+                setImageOfProduct("");
+                setProgress(0);
+              })
+              .catch((e) => {
+                alert(e.message);
+              });
           }
         });
       }
     );
   }
 
+  const buttonStyle =
+    "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2";
+
   return (
-    <div className="flex flex-col items-center">
-      please select your purpose:
-      <div className="flex border border-black justify-center w-2/5 mt-3">
-        {" "}
-        <button
-          className="bg-green-500 p-2 m-2 text-white"
-          onClick={() => {
-            setWantsToBuy(false);
-            setShowForm(true);
-          }}
-        >
-          I want to sell
-        </button>
-        <button
-          className="bg-red-500 p-2 m-2 text-white"
-          onClick={() => {
-            setShowForm(false);
+    <div>
+      <Navbar />
 
-            setWantsToBuy(false);
-          }}
-        >
-          I want to buy
-        </button>
-      </div>
-      {!wantsToBuy && showForm && (
-        <div>
-          <form
-            onSubmit={handleSubmit}
-            className="border border-black m-2 p-2 flex flex-col h-72 justify-evenly"
-          >
-            <input
-              type="text"
-              placeholder="Enter the name of Product"
-              required
-            />
-            <input type="file" placeholder="Upload the image" required />
-            <input
-              type="submit"
-              className="border border-black hover:shadow-md rounded-lg"
-              value="Submit"
-            />
-          </form>
+      {session ? (
+        <div className="flex flex-col items-center">
+          please select your purpose:
+          <div className="flex border border-black justify-center w-2/5 mt-3">
+            {" "}
+            <button
+              className="bg-green-500 p-2 m-2 text-white"
+              onClick={() => {
+                setWantsToBuy(false);
+                setShowForm(true);
+              }}
+            >
+              I want to sell
+            </button>
+            <button
+              className="bg-red-500 p-2 m-2 text-white"
+              onClick={() => {
+                setShowForm(false);
 
-          {progress !== "" && (
-            <div className="mt-20">
-              <Progress_bar bgcolor="#ff00ff" progress={progress} height={30} />
+                setWantsToBuy(true);
+              }}
+            >
+              I want to buy
+            </button>
+          </div>
+          {!wantsToBuy && showForm && (
+            <div>
+              <form
+                onSubmit={handleSubmit}
+                className="border border-black m-2 p-2 flex flex-col h-72 justify-evenly"
+              >
+                <input
+                  type="text"
+                  placeholder="Enter the name of Product"
+                  value={nameOfProduct}
+                  onChange={(e) => {
+                    setNameOfProduct(e.target.value);
+                  }}
+                  required
+                />
+                <input
+                  type="file"
+                  placeholder="Upload the image"
+                  required
+                  value={imageOfProduct}
+                />
+                <input
+                  type="submit"
+                  className="border border-black hover:shadow-md rounded-lg"
+                  value="Submit"
+                />
+              </form>
+
+              {progress !== "" && (
+                <div className="mt-20">
+                  <Progress_bar
+                    bgcolor="#ff00ff"
+                    progress={progress}
+                    height={30}
+                  />
+                </div>
+              )}
+            </div>
+          )}
+          {wantsToBuy && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 mx-auto">
+              {productsList.map((product, index) => (
+                <Stationary_Card stationary={product} key={index} />
+              ))}
             </div>
           )}
         </div>
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <button onClick={signIn} className={buttonStyle}>
+            Login
+          </button>
+        </div>
       )}
-      {wantsToBuy && <div></div>}
     </div>
   );
 }
