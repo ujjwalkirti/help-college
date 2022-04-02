@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../components/Navbar";
 
 function Reviews() {
   return (
-    <div>Reviews</div>
-  )
+    <div>
+      <Navbar />
+    </div>
+  );
 }
 
-export default Reviews
+export default Reviews;

@@ -17,6 +17,7 @@ function Stationaries() {
   const [wantsToBuy, setWantsToBuy] = React.useState(false);
   const [showForm, setShowForm] = React.useState(false);
   const [nameOfProduct, setNameOfProduct] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [productsList, setProductList] = React.useState([]);
   const [imageOfProduct, setImageOfProduct] = React.useState("");
   const [progress, setProgress] = React.useState("");
@@ -44,14 +45,15 @@ function Stationaries() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const file = e.target[1].files[0];
+    const file = e.target[2].files[0];
+    // console.log(e.target[1]);
     if (app) uploadFile(file);
   };
 
   function uploadFile(file) {
     if (!file) return;
     const storage = getStorage();
-    const storageRef = ref(storage, `/files/vehicles/${file.name}`);
+    const storageRef = ref(storage, `/files/stationaries/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -75,14 +77,15 @@ function Stationaries() {
 
             addDoc(collection(db, "stationaries"), {
               name: nameOfProduct,
+              description: description,
               owner: session.user.email,
               image: downloadURL,
             })
               .then((doc) => {
-                console.log(doc);
                 setNameOfProduct("");
                 alert("Your stationary item uploaded successfully");
                 setImageOfProduct("");
+                setDescription("");
                 setProgress(0);
               })
               .catch((e) => {
@@ -141,11 +144,19 @@ function Stationaries() {
                   }}
                   required
                 />
+                <textarea
+                  className="border border-black p-1"
+                  placeholder="Enter the description of Product"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                />
                 <input
                   type="file"
                   placeholder="Upload the image"
                   required
-                  value={imageOfProduct}
+                  // value={imageOfProduct}
                 />
                 <input
                   type="submit"
