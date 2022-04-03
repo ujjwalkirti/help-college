@@ -9,7 +9,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { app, db } from "../../components/Firebase/Firebase";
 
-const createStudentChapter = () => {
+const CreateStudentChapter = () => {
   const [name, setName] = React.useState("");
   const [code, setCode] = React.useState("");
 
@@ -103,4 +103,4 @@ const createStudentChapter = () => {
   );
 };
 
-export default createStudentChapter;
+export default CreateStudentChapter;
