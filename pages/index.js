@@ -5,7 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
-  
+
   return (
     <div className="bg-gray-100 h-screen">
       <Head>
@@ -17,8 +17,10 @@ export default function Home() {
       <Functionalities />
 
       {session && (
-        <div className="">
-          <p>{session.user.email}</p>
+        <div className="mt-4">
+          <p className="text-center">
+            You are logged in as <strong>{session.user.email}</strong>
+          </p>
         </div>
       )}
     </div>
