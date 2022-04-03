@@ -29,7 +29,7 @@ function Reviews() {
         // handle success
         // console.log(response.data);
         if (response.data !== []) {
-          setStudentChapters(response.data);
+          setDormitories(response.data);
         } else {
           alert("No dormitory/hostel found!");
         }
@@ -41,7 +41,7 @@ function Reviews() {
   }, []);
 
   const divStyle = "w-screen";
-  const noDivStyle = "";
+  const noDivStyle = "hidden";
 
   const selectedButtonStyle = "w-1/2  bg-black text-white p-2 border";
   const notSelectedButtonStyle = "w-1/2 bg-white text-black p-2 border";

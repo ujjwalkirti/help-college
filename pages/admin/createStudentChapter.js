@@ -45,7 +45,7 @@ const createStudentChapter = () => {
           {
             // console.log("File available at", downloadURL);
 
-            addDoc(collection(db, "hostel"), {
+            addDoc(collection(db, "student_chapter"), {
               student_chapter_name: name,
               student_chapter_code: code,
               owner: session.user.email,
@@ -75,7 +75,7 @@ const createStudentChapter = () => {
       >
         <input
           type="text"
-          placeholder="Enter Hostel Name"
+          placeholder="Enter Student Chapter Name"
           required
           value={name}
           className="p-2"
@@ -86,7 +86,7 @@ const createStudentChapter = () => {
         <input
           type="text"
           required
-          placeholder="enter the code for hostel"
+          placeholder="Enter the code for Student Chapter"
           className="p-2"
           value={code}
           onChange={(e) => {

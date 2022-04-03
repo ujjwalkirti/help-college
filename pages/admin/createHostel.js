@@ -73,7 +73,7 @@ const createHostel = () => {
       >
         <input
           type="text"
-          placeholder="Enter Hostel Name"
+          placeholder="Enter hostel Name"
           required
           value={name}
           className="p-2"
@@ -84,7 +84,7 @@ const createHostel = () => {
         <input
           type="text"
           required
-          placeholder="enter the code for hostel"
+          placeholder="Enter the code for hostel"
           className="p-2"
           value={code}
           onChange={(e) => {
