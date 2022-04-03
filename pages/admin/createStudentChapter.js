@@ -9,7 +9,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { app, db } from "../../components/Firebase/Firebase";
 
-const createHostel = () => {
+const createStudentChapter = () => {
   const [name, setName] = React.useState("");
   const [code, setCode] = React.useState("");
 
@@ -25,7 +25,7 @@ const createHostel = () => {
   function uploadFile(file) {
     if (!file) return;
     const storage = getStorage();
-    const storageRef = ref(storage, `/files/hostels/${file.name}`);
+    const storageRef = ref(storage, `/files/student_chapters/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -46,13 +46,13 @@ const createHostel = () => {
             // console.log("File available at", downloadURL);
 
             addDoc(collection(db, "hostel"), {
-              hostel_name: name,
-              hostel_code: code,
+              student_chapter_name: name,
+              student_chapter_code: code,
               owner: session.user.email,
-              hostel_image: downloadURL,
+              student_chapter_image: downloadURL,
             })
               .then((doc) => {
-                alert("Your hostel uploaded successfully");
+                alert("Your student chapter uploaded successfully");
                 setName("");
                 setCode("");
               })
@@ -66,7 +66,9 @@ const createHostel = () => {
   }
   return (
     <div>
-      <p className="text-center font-bold text-5xl m-4">Form to add a hostel</p>
+      <p className="text-center font-bold text-5xl m-4">
+        Form to add a Student Chapter
+      </p>
       <form
         onSubmit={handleSubmit}
         className="border flex flex-col border-black w-2/5 mx-auto p-2"
@@ -101,4 +103,4 @@ const createHostel = () => {
   );
 };
 
-export default createHostel;
+export default createStudentChapter;

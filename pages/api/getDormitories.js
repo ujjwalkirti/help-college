@@ -2,7 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../components/Firebase/Firebase";
 
 export default async function handler(req, res) {
-  const values = await getDocs(collection(db, "dormitories"));
+  const values = await getDocs(collection(db, "hostel"));
   let items = [];
   values.forEach((value) => items.push(value.data()));
 
