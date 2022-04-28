@@ -1,4 +1,24 @@
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../components/Firebase/Firebase";
+
+let calender_url = "";
+
+async function getCalenderFromFirestore() {
+  const docRef = doc(db, "academic_calender", "current");
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    // console.log("Document data:", docSnap.data());
+    calender_url = docSnap.data().imageUrl;
+    console.log(docSnap.data().imageUrl);
+  } else {
+    // doc.data() will be undefined in this case
+    // console.log("No such
+  }
+}
+
 export default function handler(req, res) {
+  getCalenderFromFirestore();
   const data = [
     {
       name: "Previous Year Questions",
@@ -11,7 +31,7 @@ export default function handler(req, res) {
       name: "Academic Calender",
       description: "Academic calender for the academic year 2021-22",
       backgroundImg: "",
-      url: "",
+      url: calender_url,
     },
     {
       name: "Old Books and other Stationaries for sale",

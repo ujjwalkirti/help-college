@@ -10,7 +10,7 @@ function Functionalities() {
       .then(function (response) {
         // handle success
         setFunctionalities(response.data);
-        console.log(functionalities);
+        
       })
       .catch(function (error) {
         // handle error

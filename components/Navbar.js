@@ -18,8 +18,12 @@ function Navbar() {
   return (
     <div className="bg-black">
       <div className="h-16 w-4/5 mx-auto text-white shadow-md flex items-center justify-between">
-        <a href="/" className="mx-2 font-bold text-3xl cursor-pointer">
-          Home
+        <a
+          href="/"
+          className="mx-2 flex items-center font-bold text-3xl cursor-pointer"
+        >
+          <img src="favicon.ico" className="h-12 mr-2" />
+          <p className="hidden md:flex">Helping you through!</p>
         </a>
         {!session ? (
           <div className="flex mr-2">

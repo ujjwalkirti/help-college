@@ -27,16 +27,22 @@ function Stationaries() {
   //fetching all the stationaries uploaded for sale
   React.useEffect(() => {
     if (wantsToBuy) {
-      if (productsList !== []) {
+      if (productsList.length === 0) {
         axios
           .get("/api/getStationaries")
           .then(function (response) {
             // handle success
             // console.log(response.data);
-            setProductList(response.data);
+
+            if (response.data.length === 0) {
+              console.log("array is empty");
+            } else {
+              setProductList(response.data);
+            }
           })
           .catch(function (error) {
             // handle error
+
             console.log(error);
           });
       }

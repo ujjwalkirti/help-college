@@ -100,14 +100,14 @@ function Pyq() {
                 name="fav_language"
                 value="end-sem"
               />
-               <label for="end-sem">End Semester</label> {" "}
+              <label for="end-sem">End Semester</label> {" "}
               <input
                 type="radio"
                 id="mid-sem"
                 name="fav_language"
                 value="mid-sem"
               />
-               <label for="css">Mid Semester</label>
+              <label for="css">Mid Semester</label>
             </div>
           </div>
           <label for="year">Please select academic year:</label>
