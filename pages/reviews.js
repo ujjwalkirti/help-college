@@ -75,12 +75,16 @@ function Reviews() {
         </div>
         <div className={`${viewHostel ? divStyle : noDivStyle}`}>
           {dormitories.map((dorm, index) => {
-            return <div>dorm {index + 1}</div>;
+            return (
+              <div>
+                {index + 1}. {dorm.hostel_name}
+              </div>
+            );
           })}
         </div>
         <div className={`${!viewHostel ? divStyle : noDivStyle}`}>
           {studentChapters.map((studentChapter, index) => {
-            return <div>student_chapter {index + 1}</div>;
+            return <div>{index + 1}. {studentChapter.student_chapter_name}</div>;
           })}
         </div>
       </div>

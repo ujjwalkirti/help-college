@@ -1,9 +1,9 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../components/Firebase/Firebase";
 
-let calender_url = "";
-
 export default function handler(req, res) {
+  let calender_url = "";
+
   function getter() {
     const docRef = doc(db, "academic_calender", "current");
     getDoc(docRef)
