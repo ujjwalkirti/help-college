@@ -8,6 +8,8 @@ export default NextAuth({
       clientId: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_SECRET,
     }),
+
     // ...add more providers here
   ],
+  secret: process.env.NEXT_PUBLIC_SECRET_KEY,
 });
