@@ -19,7 +19,7 @@ export default function Home() {
       {session && (
         <div className="mt-4">
           <p className="text-center">
-            You are logged in as <strong>{session.user.email}</strong>
+            You are logged in as <strong>{session.user.name}</strong>
           </p>
         </div>
       )}

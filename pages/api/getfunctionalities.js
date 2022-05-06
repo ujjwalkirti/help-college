@@ -3,22 +3,28 @@ import { db } from "../../components/Firebase/Firebase";
 
 let calender_url = "";
 
-async function getCalenderFromFirestore() {
-  const docRef = doc(db, "academic_calender", "current");
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    // console.log("Document data:", docSnap.data());
-    calender_url = docSnap.data().imageUrl;
-    console.log(docSnap.data().imageUrl);
-  } else {
-    // doc.data() will be undefined in this case
-    // console.log("No such
-  }
-}
-
 export default function handler(req, res) {
-  getCalenderFromFirestore();
+  function getter() {
+    const docRef = doc(db, "academic_calender", "current");
+    getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          // calender_url = docSnap.data().imageUrl;
+          console.log(calender_url);
+        } else {
+          // doc.data() will be undefined in this case
+        }
+      })
+      .catch(() => {
+        console.log("process failed");
+      });
+  }
+
+  console.log("bakchodi");
+
+  getter();
+
   const data = [
     {
       name: "Previous Year Questions",
