@@ -12,6 +12,7 @@ import { app, db } from "../../components/Firebase/Firebase";
 const CreateHostel = () => {
   const [name, setName] = React.useState("");
   const [code, setCode] = React.useState("");
+  
 
   const { data: session } = useSession();
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import Navbar from "../components/Navbar";
+import ReviewsCard from "../components/ReviewsCard";
 
 function Reviews() {
   const [studentChapters, setStudentChapters] = React.useState([]);
@@ -40,7 +41,7 @@ function Reviews() {
       });
   }, []);
 
-  const divStyle = "w-screen";
+  const divStyle = "w-screen grid md:grid-cols-3 grid-cols-1";
   const noDivStyle = "hidden";
 
   const selectedButtonStyle = "w-1/2  bg-black text-white p-2 border";
@@ -75,16 +76,14 @@ function Reviews() {
         </div>
         <div className={`${viewHostel ? divStyle : noDivStyle}`}>
           {dormitories.map((dorm, index) => {
-            return (
-              <div>
-                {index + 1}. {dorm.hostel_name}
-              </div>
-            );
+            return <ReviewsCard entity={dorm} type="dormitories" />;
           })}
         </div>
         <div className={`${!viewHostel ? divStyle : noDivStyle}`}>
           {studentChapters.map((studentChapter, index) => {
-            return <div>{index + 1}. {studentChapter.student_chapter_name}</div>;
+            return (
+              <ReviewsCard entity={studentChapter} type="student chapter" />
+            );
           })}
         </div>
       </div>
