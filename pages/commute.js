@@ -103,11 +103,14 @@ function Commute() {
 
   const buttonStyle =
     "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2";
-
+  const descriptionOfPage =
+    "Are you looking forward to sell your bike, or buy a new one? Then this is the perfect place for you!";
   return (
     <div>
       <Navbar />
-
+      <p className="italic text-2xl text-center font-bold w-3/5 mx-auto mb-10">
+        "{descriptionOfPage}"
+      </p>
       {session ? (
         <div className="flex flex-col items-center">
           please select your purpose:

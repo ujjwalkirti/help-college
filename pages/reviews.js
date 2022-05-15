@@ -41,15 +41,19 @@ function Reviews() {
       });
   }, []);
 
-  const divStyle = "w-screen grid md:grid-cols-3 grid-cols-1";
+  const divStyle = "w-screen grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1";
   const noDivStyle = "hidden";
 
   const selectedButtonStyle = "w-1/2  bg-black text-white p-2 border";
   const notSelectedButtonStyle = "w-1/2 bg-white text-black p-2 border";
-
+  const description =
+    "SVNIT, Surat has a dozen of student chapters which makes it quite difficult for any newbie or fresher to decide which club or chapter is best suited for him. But worry no more, as here you will get to read about first hand reviews about not only student chapters and clubs but even hostels and other facilities provided by the institute.";
   return (
     <div>
       <Navbar />
+      <p className="italic text-2xl text-center font-bold w-4/5 mx-auto mb-10">
+        "{description}"
+      </p>
       <div className="mt-4">
         <div className="font-bold text-3xl">
           {" "}

@@ -62,10 +62,15 @@ function Pyq() {
       setError("You have not selected any exam type!");
     }
   };
+  const description =
+    "You will get all the previous year question papers of mid semester and end semester examinations for all the branches here!";
 
   return (
     <div>
       <Navbar />
+      <p className="italic text-2xl text-center font-bold w-3/5 mx-auto mb-10">
+        "{description}"
+      </p>
       <div className="w-2/5 mx-auto">
         {error !== "" && (
           <div className="text-red-600 flex justify-center items-center p-2 m-2 rounded-md font-semibold bg-red-300 relative">

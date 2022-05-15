@@ -102,14 +102,17 @@ function Stationaries() {
       }
     );
   }
-
+  const descriptionOfPage =
+    "This is the only place where you can sell and buy second-hand stationary items at price of your convinience";
   const buttonStyle =
     "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2";
 
   return (
     <div>
       <Navbar />
-
+      <p className="italic text-2xl text-center font-bold w-3/5 mx-auto mb-10">
+        "{descriptionOfPage}"
+      </p>
       {session ? (
         <div className="flex flex-col items-center">
           please select your purpose:
