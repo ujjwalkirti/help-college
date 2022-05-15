@@ -19,8 +19,9 @@ function Commute() {
   const [nameOfProduct, setNameOfProduct] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [productsList, setProductList] = React.useState([]);
-  const [phoneOfOwner, setPhoneOfOwner] = React.useState("");
+  const [ownerOfProduct, setOwnerOfProduct] = React.useState("");
   const [progress, setProgress] = React.useState("");
+  const [contactNumber, setContactNumber] = React.useState("");
 
   const { data: session } = useSession();
 
@@ -88,7 +89,7 @@ function Commute() {
               .then((doc) => {
                 setNameOfProduct("");
                 alert("Your Vehicle uploaded successfully");
-                setPhoneOfOwner("");
+                setOwnerOfProduct("");
                 setDescription("");
                 setProgress(0);
               })
@@ -114,7 +115,7 @@ function Commute() {
       {session ? (
         <div className="flex flex-col items-center">
           please select your purpose:
-          <div className="flex border border-black justify-center w-2/5 mt-3">
+          <div className="flex border border-black justify-center md:w-2/5 mt-3">
             {" "}
             <button
               className="bg-green-500 p-2 m-2 text-white"
@@ -140,7 +141,7 @@ function Commute() {
             <div>
               <form
                 onSubmit={handleSubmit}
-                className="border border-black m-2 p-2 flex flex-col h-72 justify-evenly"
+                className="border border-black m-2 p-2 flex flex-col justify-evenly"
               >
                 <input
                   type="text"
@@ -150,6 +151,7 @@ function Commute() {
                     setNameOfProduct(e.target.value);
                   }}
                   required
+                  className="mb-2"
                 />
                 <textarea
                   className="border border-black p-1"
@@ -160,23 +162,43 @@ function Commute() {
                   }}
                 />
                 <input
-                  type="tel"
-                  placeholder="Enter your phone number"
-                  required
-                  value={phoneOfOwner}
-                  onChange={(e) => {
-                    setPhoneOfOwner(e.target.value);
-                  }}
-                />
-                <input
                   type="file"
                   placeholder="Upload the image"
                   required
+                  className="my-2"
                   // value={imageOfProduct}
                 />
                 <input
+                  type="text"
+                  placeholder="Mention your name"
+                  value={ownerOfProduct}
+                  onChange={(e) => {
+                    setOwnerOfProduct(e.target.value);
+                  }}
+                />
+                <ul className="text-green-600 my-4">
+                  <li>
+                    Don't feel the obligation to mention your name here, it will
+                    be automatically recorded from your signed-in email.
+                  </li>
+                  <li>
+                    If you mention your name, we will accept it in place of the
+                    one from your email.
+                  </li>
+                </ul>
+                <input
+                  type="tel"
+                  placeholder="Enter your contact number"
+                  required
+                  className="my-2"
+                  value={contactNumber}
+                  onChange={(e) => {
+                    setContactNumber(e.target.value);
+                  }}
+                />
+                <input
                   type="submit"
-                  className="border border-black hover:shadow-md rounded-lg"
+                  className="border w-3/5 mx-auto cursor-pointer border-black hover:shadow-md rounded-lg hover:bg-black hover:text-white"
                   value="Submit"
                 />
               </form>
@@ -193,12 +215,20 @@ function Commute() {
             </div>
           )}
           {wantsToBuy && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 mx-auto">
-              {productsList.map((product, index) => {
-                if (product.owner !== session.user.email) {
-                  return <Stationary_Card stationary={product} key={index} />;
-                }
-              })}
+            <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
+                {productsList.map((product, index) => (
+                  <Stationary_Card stationary={product} key={index} />
+                ))}
+              </div>
+              {productsList.length === 0 && (
+                <div className="mt-10">
+                  <p className="text-2xl text-center italic w-screen">
+                    Sorry, but the marketplace seems empty.
+                  </p>
+                  <img src="sold-out.jpg" className="h-36 w-36 mx-auto" />
+                </div>
+              )}
             </div>
           )}
         </div>

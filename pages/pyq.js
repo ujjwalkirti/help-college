@@ -71,7 +71,7 @@ function Pyq() {
       <p className="italic text-2xl text-center font-bold w-3/5 mx-auto mb-10">
         "{description}"
       </p>
-      <div className="w-2/5 mx-auto">
+      <div className="md:w-2/5 mx-auto">
         {error !== "" && (
           <div className="text-red-600 flex justify-center items-center p-2 m-2 rounded-md font-semibold bg-red-300 relative">
             {error}

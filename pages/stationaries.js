@@ -19,8 +19,9 @@ function Stationaries() {
   const [nameOfProduct, setNameOfProduct] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [productsList, setProductList] = React.useState([]);
-  const [imageOfProduct, setImageOfProduct] = React.useState("");
+  const [ownerOfProduct, setOwnerOfProduct] = React.useState("");
   const [progress, setProgress] = React.useState("");
+  const [contactNumber, setContactNumber] = React.useState("");
 
   const { data: session } = useSession();
 
@@ -85,14 +86,16 @@ function Stationaries() {
               name: nameOfProduct,
               description: description,
               owner: session.user.email,
+              name: ownerOfProduct === "" ? session.user.name : ownerOfProduct,
               image: downloadURL,
             })
               .then((doc) => {
                 setNameOfProduct("");
                 alert("Your stationary item uploaded successfully");
-                setImageOfProduct("");
+                setOwnerOfProduct("");
                 setDescription("");
                 setProgress(0);
+                setContactNumber("");
               })
               .catch((e) => {
                 alert(e.message);
@@ -110,13 +113,13 @@ function Stationaries() {
   return (
     <div>
       <Navbar />
-      <p className="italic text-2xl text-center font-bold w-3/5 mx-auto mb-10">
+      <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-2">
         "{descriptionOfPage}"
       </p>
       {session ? (
         <div className="flex flex-col items-center">
-          please select your purpose:
-          <div className="flex border border-black justify-center w-2/5 mt-3">
+          Please select your purpose:
+          <div className="flex border border-black justify-center md:w-2/5">
             {" "}
             <button
               className="bg-green-500 p-2 m-2 text-white"
@@ -142,12 +145,13 @@ function Stationaries() {
             <div>
               <form
                 onSubmit={handleSubmit}
-                className="border border-black m-2 p-2 flex flex-col h-72 justify-evenly"
+                className="border border-black rounded-lg m-2 p-2 flex flex-col"
               >
                 <input
                   type="text"
                   placeholder="Enter the name of Product"
                   value={nameOfProduct}
+                  className="mb-4"
                   onChange={(e) => {
                     setNameOfProduct(e.target.value);
                   }}
@@ -165,11 +169,40 @@ function Stationaries() {
                   type="file"
                   placeholder="Upload the image"
                   required
+                  className="my-2"
                   // value={imageOfProduct}
                 />
                 <input
+                  type="text"
+                  placeholder="Mention your name"
+                  value={ownerOfProduct}
+                  onChange={(e) => {
+                    setOwnerOfProduct(e.target.value);
+                  }}
+                />
+                <ul className="text-green-600 my-4">
+                  <li>
+                    Don't feel the obligation to mention your name here, it will
+                    be automatically recorded from your signed-in email.
+                  </li>
+                  <li>
+                    If you mention your name, we will accept it in place of the
+                    one from your email.
+                  </li>
+                </ul>
+                <input
+                  type="tel"
+                  placeholder="Enter your contact number"
+                  required
+                  className="my-2"
+                  value={contactNumber}
+                  onChange={(e) => {
+                    setContactNumber(e.target.value);
+                  }}
+                />
+                <input
                   type="submit"
-                  className="border border-black hover:shadow-md rounded-lg"
+                  className="border border-black hover:shadow-md rounded-lg w-3/5 mx-auto hover:bg-black hover:text-white cursor-pointer"
                   value="Submit"
                 />
               </form>
@@ -186,10 +219,20 @@ function Stationaries() {
             </div>
           )}
           {wantsToBuy && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 mx-auto">
-              {productsList.map((product, index) => (
-                <Stationary_Card stationary={product} key={index} />
-              ))}
+            <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
+                {productsList.map((product, index) => (
+                  <Stationary_Card stationary={product} key={index} />
+                ))}
+              </div>
+              {productsList.length === 0 && (
+                <div className="mt-10">
+                  <p className="text-2xl text-center italic w-screen">
+                    Sorry, but the marketplace seems empty.
+                  </p>
+                  <img src="sold-out.jpg" className="h-36 w-36 mx-auto" />
+                </div>
+              )}
             </div>
           )}
         </div>
