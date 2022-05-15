@@ -9,7 +9,7 @@ function ReviewsCard({ entity, type }) {
         <h1 className="text-center font-bold text-2xl mb-3">
           {entity.hostel_name}
         </h1>
-        <img src={entity.hostel_image} className="mx-auto" />
+        <img src={entity.hostel_image} className="mx-auto h-72" />
         <div className="flex flex-col">
           <button className={buttonStyle}>Read Reviews</button>
           <button className={buttonStyle}>Add a Review</button>
@@ -22,7 +22,7 @@ function ReviewsCard({ entity, type }) {
         <h1 className="text-center font-bold text-2xl mb-3">
           {entity.student_chapter_name}
         </h1>
-        <img src={entity.student_chapter_image} className="mx-auto" />
+        <img src={entity.student_chapter_image} className="mx-auto h-72" />
         <div className="flex flex-col">
           <button className={buttonStyle}>Read Reviews</button>
           <button className={buttonStyle}>Add a Review</button>
