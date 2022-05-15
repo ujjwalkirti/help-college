@@ -6,6 +6,8 @@ const MakeHostelReview = () => {
 
   const { hostel } = router.query;
 
+  react.useEffect(() => {}, [hostel]);
+
   return <div className="text-black">{hostel}</div>;
 };
 
