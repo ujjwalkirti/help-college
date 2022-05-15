@@ -83,7 +83,8 @@ function Commute() {
               name: nameOfProduct,
               description: description,
               owner: session.user.email,
-              phoneNumber: phoneOfOwner,
+              name: ownerOfProduct === "" ? session.user.name : ownerOfProduct,
+              contact: contactNumber,
               image: downloadURL,
             })
               .then((doc) => {
@@ -92,6 +93,7 @@ function Commute() {
                 setOwnerOfProduct("");
                 setDescription("");
                 setProgress(0);
+                setContactNumber("");
               })
               .catch((e) => {
                 alert(e.message);

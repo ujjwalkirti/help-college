@@ -87,6 +87,7 @@ function Stationaries() {
               description: description,
               owner: session.user.email,
               name: ownerOfProduct === "" ? session.user.name : ownerOfProduct,
+              contact: contactNumber,
               image: downloadURL,
             })
               .then((doc) => {
