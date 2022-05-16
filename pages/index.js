@@ -2,9 +2,16 @@ import Head from "next/head";
 import Functionalities from "../components/Functionalities";
 import Navbar from "../components/Navbar";
 import { useSession, signIn, signOut } from "next-auth/react";
+import react from "react";
+import { getAnalytics } from "firebase/analytics";
+import { app } from "../components/Firebase/Firebase";
 
 export default function Home() {
   const { data: session } = useSession();
+
+  react.useEffect(() => {
+    const analytics = getAnalytics(app);
+  }, []);
 
   return (
     <div className="bg-gray-100 h-screen">

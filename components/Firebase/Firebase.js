@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
@@ -17,7 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
-const analytics = getAnalytics(app);
+
 
 // const storageInstance = getStorage(app, "gs://college-help-c7f67.appspot.com/");
 
