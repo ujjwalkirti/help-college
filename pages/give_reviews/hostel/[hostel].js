@@ -1,5 +1,15 @@
 import { useRouter } from "next/router";
 import react from "react";
+import Navbar from "../../../components/Navbar";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../../components/Firebase/Firebase";
+import { useSession } from "next-auth/react";
 
 const MakeHostelReview = () => {
   const { data: session } = useSession();

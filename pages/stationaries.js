@@ -12,6 +12,7 @@ import { useSession, signIn } from "next-auth/react";
 import axios from "axios";
 import Stationary_Card from "../components/Stationary_Card";
 import Navbar from "../components/Navbar";
+const { v4: uuidv4 } = require("uuid");
 
 function Stationaries() {
   const [wantsToBuy, setWantsToBuy] = React.useState(false);
@@ -82,11 +83,15 @@ function Stationaries() {
           {
             // console.log("File available at", downloadURL);
 
+            const id = uuidv4();
+
             addDoc(collection(db, "stationaries"), {
               name: nameOfProduct,
               description: description,
               owner: session.user.email,
-              name: ownerOfProduct === "" ? session.user.name : ownerOfProduct,
+              uid: id,
+              ownerName:
+                ownerOfProduct === "" ? session.user.name : ownerOfProduct,
               contact: contactNumber,
               image: downloadURL,
             })
@@ -223,7 +228,11 @@ function Stationaries() {
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
                 {productsList.map((product, index) => (
-                  <Stationary_Card stationary={product} key={index} />
+                  <Stationary_Card
+                    stationary={product}
+                    entity="stationary"
+                    key={index}
+                  />
                 ))}
               </div>
               {productsList.length === 0 && (

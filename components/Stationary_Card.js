@@ -1,9 +1,9 @@
 import React from "react";
 
-function Stationary_Card({ stationary }) {
+function Stationary_Card({ stationary, entity }) {
   const trimSentences = (sentence) => {
     if (typeof sentence !== "undefined") {
-      return sentence.slice(0, 100)+"...";
+      return sentence.slice(0, 100) + "...";
     }
   };
 
@@ -12,11 +12,14 @@ function Stationary_Card({ stationary }) {
       <p className="text-3xl font-semibold text-center bg-black text-white p-2 mb-2">
         {stationary.name}
       </p>
-      <img className="" src={stationary.image} />
-      <p>{trimSentences(stationary.description)}</p>
-      <button className="bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2 hover:shadow-lg">
+      <img className="w-full" src={stationary.image} />
+
+      <a
+        href={`/interested/${entity}/${stationary.uid}`}
+        className="bg-blue-500 text-center mx-auto p-2 rounded-sm text-white font-bold mt-2 hover:shadow-lg"
+      >
         I'm interested!
-      </button>
+      </a>
     </div>
   );
 }

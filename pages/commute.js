@@ -12,6 +12,7 @@ import { useSession, signIn } from "next-auth/react";
 import axios from "axios";
 import Stationary_Card from "../components/Stationary_Card";
 import Navbar from "../components/Navbar";
+const { v4: uuidv4 } = require("uuid");
 
 function Commute() {
   const [wantsToBuy, setWantsToBuy] = React.useState(false);
@@ -49,8 +50,9 @@ function Commute() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const file = e.target[3].files[0];
+    const file = e.target[2].files[0];
     // console.log(e.target[1]);
+
     if (app) uploadFile(file);
   };
 
@@ -79,11 +81,15 @@ function Commute() {
           {
             // console.log("File available at", downloadURL);
 
+            const id = uuidv4();
+
             addDoc(collection(db, "vehicles"), {
               name: nameOfProduct,
               description: description,
               owner: session.user.email,
-              name: ownerOfProduct === "" ? session.user.name : ownerOfProduct,
+              uid: id,
+              ownerName:
+                ownerOfProduct === "" ? session.user.name : ownerOfProduct,
               contact: contactNumber,
               image: downloadURL,
             })
@@ -111,7 +117,7 @@ function Commute() {
   return (
     <div>
       <Navbar />
-      <p className="italic text-2xl text-center font-bold w-3/5 mx-auto mb-10">
+      <p className="italic text-2xl text-center font-bold p-2 md:w-3/5 mx-auto mb-10">
         "{descriptionOfPage}"
       </p>
       {session ? (
@@ -220,7 +226,11 @@ function Commute() {
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
                 {productsList.map((product, index) => (
-                  <Stationary_Card stationary={product} key={index} />
+                  <Stationary_Card
+                    stationary={product}
+                    entity="vehicle"
+                    key={index}
+                  />
                 ))}
               </div>
               {productsList.length === 0 && (

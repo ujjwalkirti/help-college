@@ -8,6 +8,7 @@ import ReadReview from "../../../components/ReadReview";
 const Post = () => {
   const [reviews, setReviews] = react.useState([]);
   const [target_chapter, setTarget_chapter] = react.useState({});
+  const [noReviewsPresent, setNoReviewsPresent] = react.useState(false);
 
   const router = useRouter();
 
@@ -36,6 +37,8 @@ const Post = () => {
         });
         console.log(shots);
         setReviews(shots);
+
+        if (shots.length === 0) setNoReviewsPresent(true);
       });
     }
   }, [student_chapter]);
@@ -49,13 +52,24 @@ const Post = () => {
         </p>
         <img src={target_chapter.student_chapter_image} className="h-72 w-72" />
       </div>
-      {reviews.map((review) => {
-        return (
-          <div className="md:w-3/5 mx-auto">
-            <ReadReview entity={review} type="student_chapter" />
-          </div>
-        );
-      })}
+      {!noReviewsPresent ? (
+        <div>
+          {reviews.map((review) => {
+            return (
+              <div className="md:w-3/5 mx-auto">
+                <ReadReview entity={review} type="student_chapter" />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="">
+          {" "}
+          <p className="text-center md:text-2xl">
+            sorry no reviews have been made! 📜
+          </p>
+        </div>
+      )}
     </div>
   );
 };

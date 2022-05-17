@@ -16,28 +16,30 @@ export default function handler(req, res) {
               name: "Previous Year Questions",
               url: "/pyq",
               backgroundImg: "",
+              emoji: "❓",
             },
             {
               name: "Academic Calender",
               description: "Academic calender for the academic year 2021-22",
               backgroundImg: "",
               url: calender_url,
+              emoji: "📆",
             },
             {
               name: "Old Books and other Stationaries for sale",
-
+              emoji: "📚",
               backgroundImg: "",
               url: "/stationaries",
             },
             {
               name: "Vehicles for sale",
-
+              emoji: "🏍️",
               backgroundImg: "",
               url: "/commute",
             },
             {
               name: "Hostel and Student chapter reviews",
-
+              emoji: "🏨",
               backgroundImg: "",
               url: "/reviews",
             },
