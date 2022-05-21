@@ -23,6 +23,7 @@ function Commute() {
   const [ownerOfProduct, setOwnerOfProduct] = React.useState("");
   const [progress, setProgress] = React.useState("");
   const [contactNumber, setContactNumber] = React.useState("");
+  const [price, setPrice] = React.useState("");
 
   const { data: session } = useSession();
 
@@ -88,6 +89,7 @@ function Commute() {
               description: description,
               owner: session.user.email,
               uid: id,
+              cost: price,
               ownerName:
                 ownerOfProduct === "" ? session.user.name : ownerOfProduct,
               contact: contactNumber,
@@ -100,6 +102,7 @@ function Commute() {
                 setDescription("");
                 setProgress(0);
                 setContactNumber("");
+                setPrice("");
               })
               .catch((e) => {
                 alert(e.message);
@@ -117,7 +120,7 @@ function Commute() {
   return (
     <div>
       <Navbar />
-      <p className="italic text-2xl text-center font-bold p-2 md:w-3/5 mx-auto mb-10">
+      <p className="italic text-2xl text-center font-bold p-2 md:w-3/5 mx-auto ">
         "{descriptionOfPage}"
       </p>
       {session ? (
@@ -126,7 +129,7 @@ function Commute() {
           <div className="flex border border-black justify-center md:w-2/5 mt-3">
             {" "}
             <button
-              className="bg-green-500 p-2 m-2 text-white"
+              className="bg-green-500 p-2 m-2 text-white text-xl font-bold"
               onClick={() => {
                 setWantsToBuy(false);
                 setShowForm(true);
@@ -135,7 +138,7 @@ function Commute() {
               I want to sell
             </button>
             <button
-              className="bg-red-500 p-2 m-2 text-white"
+              className="bg-red-500 p-2 m-2 text-white text-xl font-bold"
               onClick={() => {
                 setShowForm(false);
 
@@ -176,6 +179,19 @@ function Commute() {
                   className="my-2"
                   // value={imageOfProduct}
                 />
+                <div className="flex items-center">
+                  <p className="mr-2">Rs</p>
+                  <input
+                    type="text"
+                    placeholder="Enter a reasonable price!"
+                    required
+                    value={price}
+                    onChange={(e) => {
+                      setPrice(e.target.value);
+                    }}
+                    className="my-2"
+                  />
+                </div>{" "}
                 <input
                   type="text"
                   placeholder="Mention your name"
@@ -206,13 +222,13 @@ function Commute() {
                 />
                 <input
                   type="submit"
-                  className="border w-3/5 mx-auto cursor-pointer border-black hover:shadow-md rounded-lg hover:bg-black hover:text-white"
+                  className="border w-2/5 font-bold text-xl mx-auto cursor-pointer border-black hover:shadow-md rounded-lg hover:bg-black hover:text-white"
                   value="Submit"
                 />
               </form>
 
               {progress !== "" && (
-                <div className="mt-20">
+                <div className="mt-5">
                   <Progress_bar
                     bgcolor="#ff00ff"
                     progress={progress}

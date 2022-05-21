@@ -23,6 +23,7 @@ function Stationaries() {
   const [ownerOfProduct, setOwnerOfProduct] = React.useState("");
   const [progress, setProgress] = React.useState("");
   const [contactNumber, setContactNumber] = React.useState("");
+  const [price, setPrice] = React.useState("");
 
   const { data: session } = useSession();
 
@@ -90,6 +91,7 @@ function Stationaries() {
               description: description,
               owner: session.user.email,
               uid: id,
+              cost: price,
               ownerName:
                 ownerOfProduct === "" ? session.user.name : ownerOfProduct,
               contact: contactNumber,
@@ -128,7 +130,7 @@ function Stationaries() {
           <div className="flex border border-black justify-center md:w-2/5">
             {" "}
             <button
-              className="bg-green-500 p-2 m-2 text-white"
+              className="bg-green-500 p-2 m-2 text-white text-xl font-bold"
               onClick={() => {
                 setWantsToBuy(false);
                 setShowForm(true);
@@ -137,7 +139,7 @@ function Stationaries() {
               I want to sell
             </button>
             <button
-              className="bg-red-500 p-2 m-2 text-white"
+              className="bg-red-500 p-2 m-2 text-white text-xl font-bold"
               onClick={() => {
                 setShowForm(false);
 
@@ -180,6 +182,16 @@ function Stationaries() {
                 />
                 <input
                   type="text"
+                  placeholder="Enter a reasonable price!"
+                  required
+                  value={price}
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                  }}
+                  className="my-2"
+                />
+                <input
+                  type="text"
                   placeholder="Mention your name"
                   value={ownerOfProduct}
                   onChange={(e) => {
@@ -208,7 +220,9 @@ function Stationaries() {
                 />
                 <input
                   type="submit"
-                  className="border border-black hover:shadow-md rounded-lg w-3/5 mx-auto hover:bg-black hover:text-white cursor-pointer"
+                  className="border border-black hover:shadow-md rounded-lg w-2/5 mx-auto bg-black
+                  text-xl font-semibold text-white cursor-pointer
+                  hover:text-black hover:bg-white"
                   value="Submit"
                 />
               </form>

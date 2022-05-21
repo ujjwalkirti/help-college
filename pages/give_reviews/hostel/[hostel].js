@@ -73,35 +73,37 @@ const MakeHostelReview = () => {
       <p className="text-center text-2xl font-bold italic mt-4">
         {target_hostel.hostel_name}
       </p>
-      <form
-        className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          required
-          className="p-2 m-2 border-none md:w-3/5"
-        />
-        <textarea
-          value={review}
-          className="p-2 m-2 md:w-3/5"
-          onChange={(e) => {
-            setReview(e.target.value);
-          }}
-          placeholder={`What do you have to say about ${target_hostel.hostel_name}`}
-          required
-        ></textarea>
-        <input
-          type="submit"
-          className="m-2 border border-black p-2 text-xl font-bold cursor-pointer hover:bg-black hover:text-white"
-          placeholder="Submit"
-        />
-      </form>
+      {session.user && (
+        <form
+          className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+            className="p-2 m-2 border-none md:w-3/5"
+          />
+          <textarea
+            value={review}
+            className="p-2 m-2 md:w-3/5"
+            onChange={(e) => {
+              setReview(e.target.value);
+            }}
+            placeholder={`What do you have to say about ${target_hostel.hostel_name}`}
+            required
+          ></textarea>
+          <input
+            type="submit"
+            className="m-2 border border-black p-2 text-xl font-bold cursor-pointer hover:bg-black hover:text-white"
+            placeholder="Submit"
+          />
+        </form>
+      )}
       <p className="text-center">
         <strong>Note</strong>: The reviews you post here will not automatically
         be posted, rather it will be checked for authenticity of claims and
