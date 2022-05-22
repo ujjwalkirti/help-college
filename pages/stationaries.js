@@ -56,6 +56,14 @@ function Stationaries() {
     e.preventDefault();
     const file = e.target[2].files[0];
     // console.log(e.target[1]);
+
+    const regexExp = /^[6-9]\d{9}$/gi;
+
+    if (!regexExp.test(contactNumber)) {
+      alert("please Enter a proper contact number!");
+      setContactNumber("");
+    }
+
     if (app) uploadFile(file);
   };
 
@@ -104,6 +112,7 @@ function Stationaries() {
                 setDescription("");
                 setProgress(0);
                 setContactNumber("");
+                setPrice("");
               })
               .catch((e) => {
                 alert(e.message);
@@ -180,16 +189,26 @@ function Stationaries() {
                   className="my-2"
                   // value={imageOfProduct}
                 />
-                <input
-                  type="text"
-                  placeholder="Enter a reasonable price!"
-                  required
-                  value={price}
-                  onChange={(e) => {
-                    setPrice(e.target.value);
-                  }}
-                  className="my-2"
-                />
+                <div className="flex items-center">
+                  <p className="mr-2">Rs.</p>
+                  <input
+                    type="text"
+                    placeholder="Enter a reasonable price!"
+                    required
+                    value={price}
+                    onChange={(e) => {
+                      const regex = /^\d+(?:\.\d{0,2})$/;
+                      if (regex.test(e.target.value)) setPrice(e.target.value);
+                      const numStr = +e.target.value;
+                      if (isNaN(numStr)) {
+                        alert("Please enter a valid price!");
+                      } else {
+                        setPrice(e.target.value);
+                      }
+                    }}
+                    className="my-2"
+                  />
+                </div>
                 <input
                   type="text"
                   placeholder="Mention your name"
@@ -212,7 +231,7 @@ function Stationaries() {
                   type="tel"
                   placeholder="Enter your contact number"
                   required
-                  className="my-2"
+                  className="my-2 border-b border"
                   value={contactNumber}
                   onChange={(e) => {
                     setContactNumber(e.target.value);
@@ -228,7 +247,7 @@ function Stationaries() {
               </form>
 
               {progress !== "" && (
-                <div className="mt-20">
+                <div className="mt-5">
                   <Progress_bar
                     bgcolor="#ff00ff"
                     progress={progress}

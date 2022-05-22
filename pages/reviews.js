@@ -42,7 +42,7 @@ function Reviews() {
   }, []);
 
   const divStyle =
-    "md:w-4/5 mx-auto grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1";
+    "md:w-4/5 mx-auto grid md:grid-cols-3 xl:grid-cols-4 grid-cols-1";
   const noDivStyle = "hidden";
 
   const selectedButtonStyle = "w-1/2 bg-black text-white p-2 border";
