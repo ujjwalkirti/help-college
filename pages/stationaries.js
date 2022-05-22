@@ -263,7 +263,7 @@ function Stationaries() {
                 {productsList.map((product, index) => (
                   <Stationary_Card
                     stationary={product}
-                    entity="stationary"
+                    entity="stationaries"
                     key={index}
                   />
                 ))}

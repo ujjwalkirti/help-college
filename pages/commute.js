@@ -54,6 +54,13 @@ function Commute() {
     const file = e.target[2].files[0];
     // console.log(e.target[1]);
 
+    const regexExp = /^[6-9]\d{9}$/gi;
+
+    if (!regexExp.test(contactNumber)) {
+      alert("please Enter a proper contact number!");
+      setContactNumber("");
+    }
+
     if (app) uploadFile(file);
   };
 
@@ -187,7 +194,14 @@ function Commute() {
                     required
                     value={price}
                     onChange={(e) => {
-                      setPrice(e.target.value);
+                      const regex = /^\d+(?:\.\d{0,2})$/;
+                      if (regex.test(e.target.value)) setPrice(e.target.value);
+                      const numStr = +e.target.value;
+                      if (isNaN(numStr)) {
+                        alert("Please enter a valid price!");
+                      } else {
+                        setPrice(e.target.value);
+                      }
                     }}
                     className="my-2"
                   />
@@ -244,7 +258,7 @@ function Commute() {
                 {productsList.map((product, index) => (
                   <Stationary_Card
                     stationary={product}
-                    entity="vehicle"
+                    entity="vehicles"
                     key={index}
                   />
                 ))}
