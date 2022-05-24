@@ -129,16 +129,25 @@ function Stationaries() {
   const buttonStyle =
     "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2";
 
+  const backgroundStyle = {
+    backgroundImage: "url('wallpapers/3.jpg')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+  };
+
   return (
-    <div>
+    <div className="min-h-screen" style={backgroundStyle}>
       <Navbar />
-      <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-2">
+      <p className="italic text-white text-2xl md:text-4xl text-center font-bold md:w-3/5 mx-auto mb-2">
         "{descriptionOfPage}"
       </p>
       {session ? (
         <div className="flex flex-col items-center">
-          Please select your purpose:
-          <div className="flex border border-black justify-center md:w-2/5">
+          <p className="text-center text-xl text-white mt-10">
+            please select your purpose:
+          </p>
+          <div className="flex justify-center md:w-2/5 mt-3">
             {" "}
             <button
               className="bg-green-500 p-2 m-2 text-white text-xl font-bold"

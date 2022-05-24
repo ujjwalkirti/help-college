@@ -32,15 +32,26 @@ const StationaryInfo = () => {
   return (
     <div>
       <Navbar />
-     
-      <div className="w-3/5 border border-b border-black mx-auto rounded-lg flex flex-col items-center">
-        <p>{target_object.name}</p>
-        <img src={target_object.image} />
-        <p>{target_object.description}</p>
-        <p>{target_object.cost}</p>
-        <p>{target_object.ownerName}</p>
-        <p>{target_object.contact}</p>
+
+      <div className="w-3/5 border border-b border-black mx-auto m-4 flex flex-col md:flex-row">
+        <div className="md:w-1/2 flex flex-col items-center justify-evenly">
+          <p className="text-4xl font-bold">{target_object.name}</p>
+
+          <p className="text-2xl">"{target_object.description}"</p>
+          <p className="italic">Rs. {target_object.cost}</p>
+          <div className="">
+            <p className="">Owner: {target_object.ownerName}</p>
+            <p className="">Contact: {target_object.contact}</p>
+          </div>
+        </div>
+        <div className="md:w-1/2 border">
+          <img className="h-full" src={target_object.image} />
+        </div>
       </div>
+      <p className="text-center text-red-600 text-2xl">
+        <strong>Note:</strong> We don't claim the authenticity of details
+        provided above, and hence deal at your own risk.
+      </p>
     </div>
   );
 };

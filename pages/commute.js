@@ -29,7 +29,7 @@ function Commute() {
   const { data: session } = useSession();
 
   React.useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     if (wantsToBuy) {
       if (productsList !== []) {
         axios
@@ -127,16 +127,26 @@ function Commute() {
     "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2";
   const descriptionOfPage =
     "Are you looking forward to sell your bike, or buy a new one? Then this is the perfect place for you!";
+
+  const backgroundStyle = {
+    backgroundImage: "url('wallpapers/4.jpg')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+  };
+
   return (
-    <div>
+    <div style={backgroundStyle} className="min-h-screen">
       <Navbar />
-      <p className="italic text-2xl text-center font-bold p-2 md:w-3/5 mx-auto ">
+      <p className="italic text-2xl text-white text-center font-bold p-2 md:w-3/5 mx-auto ">
         "{descriptionOfPage}"
       </p>
       {session ? (
         <div className="flex flex-col items-center">
-          please select your purpose:
-          <div className="flex border border-black justify-center md:w-2/5 mt-3">
+          <p className="text-center text-xl text-white mt-10">
+            please select your purpose:
+          </p>
+          <div className="flex justify-center md:w-2/5 mt-3">
             {" "}
             <button
               className="bg-green-500 p-2 m-2 text-white text-xl font-bold"
@@ -162,7 +172,7 @@ function Commute() {
             <div>
               <form
                 onSubmit={handleSubmit}
-                className="border border-black m-2 p-2 flex flex-col justify-evenly"
+                className=" bg-white rounded-lg m-2 p-2 flex flex-col justify-evenly"
               >
                 <input
                   type="text"

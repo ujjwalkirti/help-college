@@ -65,13 +65,22 @@ function Pyq() {
   const description =
     "You will get all the previous year question papers of mid semester and end semester examinations for all the branches here!";
 
+  const backgroundStyle = {
+    backgroundImage: "url('wallpapers/2.webp')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+  };
+
   return (
-    <div>
+    <div style={backgroundStyle} className="min-h-screen">
       <Navbar />{" "}
       <p className="font-bold text-2xl text-center">
         This page is under construction, sorry for the inconvenience!
       </p>
-      <img className="w-3/5 md:w-72 md:mt-10  object-contain mx-auto" src="maintainenance.jpg" />
+      <img
+        className="w-3/5 md:w-72 md:mt-10  object-contain mx-auto"
+        src="maintainenance.jpg"
+      />
     </div>
   );
 
