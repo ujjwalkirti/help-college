@@ -38,9 +38,15 @@ const MakeHostelReview = () => {
       });
     }
   }, [hostel]);
+  const backgroundStyle = {
+    backgroundImage: "url('../../wallpapers/9.jpg')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+  };
 
   return (
-    <div className="text-black">
+    <div className="min-h-screen text-white" style={backgroundStyle}>
       {" "}
       <Navbar />
       <div className="flex flex-col p-4 md:flex-row md:w-3/5 mx-auto md:justify-between items-center">

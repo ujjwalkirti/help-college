@@ -65,15 +65,21 @@ const Post = () => {
         alert(e.message);
       });
   };
+  const backgroundStyle = {
+    backgroundImage: "url('../../wallpapers/8.jpg')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+  };
 
   return (
-    <div>
+    <div className="min-h-screen" style={backgroundStyle}>
       <Navbar />
       <img
         src={target_chapter.student_chapter_image}
         className="mx-auto rounded-lg mt-4 h-52 w-52"
       />
-      <p className="text-center text-2xl font-bold italic mt-4">
+      <p className="text-center text-2xl text-white font-bold italic mt-4">
         {target_chapter.student_chapter_name}
       </p>
       {typeof session !== "undefined" && session?.user ? (
@@ -93,7 +99,7 @@ const Post = () => {
           />
           <textarea
             value={review}
-            className="p-2 m-2 md:w-3/5"
+            className="p-2 m-2 w-full md:w-3/5"
             onChange={(e) => {
               setReview(e.target.value);
             }}
@@ -107,12 +113,12 @@ const Post = () => {
           />
         </form>
       ) : (
-        <div className="flex flex-col mt-10">
-          <p className="text-center">Please login in order to post your reviews</p>
+        <div className="flex flex-col mt-10 bg-gray-300 md:w-2/5 md:mx-auto mb-4 mx-4 p-2 rounded-lg">
+          <p className="text-center text-2xl">Please login in order to post your reviews</p>
           <button className="bg-blue-500 mx-auto my-5 text-xl text-white hover:shadow-lg rounded-lg px-2 w-40 " onClick={signIn}>Login</button>
         </div>
       )}
-      <p className="text-center">
+      <p className="text-center text-white font-semibold text-2xl">
         <strong>Note</strong>: The reviews you post here will not automatically
         be posted, rather it will be checked for authenticity of claims and
         other relevant factors by authorities.{" "}

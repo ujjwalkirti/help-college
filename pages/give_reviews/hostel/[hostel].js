@@ -9,7 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const MakeHostelReview = () => {
   const { data: session } = useSession();
@@ -63,8 +63,16 @@ const MakeHostelReview = () => {
       });
   };
 
+    const backgroundStyle = {
+      backgroundImage: "url('../../wallpapers/6.jpg')",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundAttachment: "fixed",
+    };
+
+
   return (
-    <div className="text-black">
+    <div className="min-h-screen text-white" style={backgroundStyle}>
       <Navbar />
       <img
         src={target_hostel.hostel_image}
@@ -73,7 +81,7 @@ const MakeHostelReview = () => {
       <p className="text-center text-2xl font-bold italic mt-4">
         {target_hostel.hostel_name}
       </p>
-      {session.user && (
+      {typeof session !== "undefined" && session?.user ? (
         <form
           className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg"
           onSubmit={handleSubmit}
@@ -103,6 +111,18 @@ const MakeHostelReview = () => {
             placeholder="Submit"
           />
         </form>
+      ) : (
+        <div className="flex flex-col mt-10 bg-gray-300 md:w-2/5 md:mx-auto mb-4 mx-4 p-2 rounded-lg">
+          <p className="text-center text-2xl">
+            Please login in order to post your reviews
+          </p>
+          <button
+            className="bg-blue-500 mx-auto my-5 text-xl text-white hover:shadow-lg rounded-lg px-2 w-40 "
+            onClick={signIn}
+          >
+            Login
+          </button>
+        </div>
       )}
       <p className="text-center">
         <strong>Note</strong>: The reviews you post here will not automatically

@@ -29,8 +29,8 @@ function Commute() {
   const { data: session } = useSession();
 
   React.useEffect(() => {
-    setLoading(true);
     if (wantsToBuy) {
+      setLoading(true);
       if (productsList !== []) {
         axios
           .get("/api/getVehicles")

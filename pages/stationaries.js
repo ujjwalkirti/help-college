@@ -30,18 +30,18 @@ function Stationaries() {
 
   //fetching all the stationaries uploaded for sale
   React.useEffect(() => {
-    setLoading(true);
     if (wantsToBuy) {
-      if (productsList.length === 0) {
+      setLoading(true);
+      if (productsList !== []) {
         axios
           .get("/api/getStationaries")
           .then(function (response) {
             // handle success
             // console.log(response.data);
-
-            if (response.data.length === 0) {
-            } else {
+            if (response.data !== []) {
               setProductList(response.data);
+            } else {
+              alert("No Items available for sale");
             }
             setLoading(false);
           })
@@ -52,6 +52,7 @@ function Stationaries() {
           });
       }
     }
+    
   }, [wantsToBuy]);
 
   const handleSubmit = (e) => {
@@ -139,12 +140,12 @@ function Stationaries() {
   return (
     <div className="min-h-screen" style={backgroundStyle}>
       <Navbar />
-      <p className="italic text-white text-2xl md:text-4xl text-center font-bold md:w-3/5 mx-auto mb-2">
+      <p className="italic text-black text-2xl md:text-4xl text-center font-bold md:w-3/5 mx-auto mb-2">
         "{descriptionOfPage}"
       </p>
       {session ? (
         <div className="flex flex-col items-center">
-          <p className="text-center text-xl text-white mt-10">
+          <p className="text-center text-xl text-black mt-10">
             please select your purpose:
           </p>
           <div className="flex justify-center md:w-2/5 mt-3">
@@ -173,7 +174,7 @@ function Stationaries() {
             <div>
               <form
                 onSubmit={handleSubmit}
-                className="border border-black rounded-lg m-2 p-2 flex flex-col"
+                className=" bg-white rounded-lg m-2 p-2 flex flex-col justify-evenly"
               >
                 <input
                   type="text"

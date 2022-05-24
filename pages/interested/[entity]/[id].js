@@ -28,13 +28,19 @@ const StationaryInfo = () => {
       }
     }
   }, [id, entity]);
+  const backgroundStyle = {
+    backgroundImage: "url('../../wallpapers/7.jpg')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+  };
 
   return (
-    <div>
+    <div className="min-h-screen" style={backgroundStyle}>
       <Navbar />
 
-      <div className="w-3/5 border border-b border-black mx-auto m-4 flex flex-col md:flex-row">
-        <div className="md:w-1/2 flex flex-col items-center justify-evenly">
+      <div className="w-3/5 h-full bg-white rounded-xl mx-auto m-4 flex flex-col md:flex-row">
+        <div className="md:w-1/2 flex flex-col items-center  justify-evenly text-center">
           <p className="text-4xl font-bold">{target_object.name}</p>
 
           <p className="text-2xl">"{target_object.description}"</p>
@@ -44,13 +50,13 @@ const StationaryInfo = () => {
             <p className="">Contact: {target_object.contact}</p>
           </div>
         </div>
-        <div className="md:w-1/2 border">
-          <img className="h-full" src={target_object.image} />
+        <div className="md:w-1/2 h-full border">
+          <img className="w-full" src={target_object.image} />
         </div>
       </div>
-      <p className="text-center text-red-600 text-2xl">
+      <p className="text-center text-white bg-red-600 text-2xl font-semibold">
         <strong>Note:</strong> We don't claim the authenticity of details
-        provided above, and hence deal at your own risk.
+        provided above, and hence deal at your own risk!
       </p>
     </div>
   );
