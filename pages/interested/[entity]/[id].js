@@ -12,7 +12,7 @@ const StationaryInfo = () => {
   const { entity, id } = router.query;
 
   React.useEffect(() => {
-    console.log(entity);
+    // console.log(entity);
     if (typeof entity !== "undefined") {
       const infoRef = collection(db, entity);
       if (id) {
@@ -23,7 +23,7 @@ const StationaryInfo = () => {
             data.push({ ...doc.data(), id: doc.id });
           });
           setTarget_object(data[0]);
-          console.log(data[0]);
+          // console.log(data[0]);
         });
       }
     }
@@ -32,9 +32,7 @@ const StationaryInfo = () => {
   return (
     <div>
       <Navbar />
-      {entity}
-      or bhai kaisi lagi bakchodi?
-      {id}
+     
       <div className="w-3/5 border border-b border-black mx-auto rounded-lg flex flex-col items-center">
         <p>{target_object.name}</p>
         <img src={target_object.image} />

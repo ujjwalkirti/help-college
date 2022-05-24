@@ -9,11 +9,9 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const Post = () => {
-
-  
   const { data: session } = useSession();
 
   const [target_chapter, setTarget_chapter] = react.useState({});
@@ -43,16 +41,14 @@ const Post = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-  
+
     // get a new date (locale machine date time)
     var date = new Date();
     // get the date as a string
     var n = date.toDateString();
     // get the time as a string
     var time = date.toLocaleTimeString();
-  
-  
+
     addDoc(collection(db, "reviews"), {
       author: name,
       code: student_chapter,
@@ -80,7 +76,7 @@ const Post = () => {
       <p className="text-center text-2xl font-bold italic mt-4">
         {target_chapter.student_chapter_name}
       </p>
-      {session.user && (
+      {typeof session !== "undefined" && session?.user ? (
         <form
           className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg"
           onSubmit={handleSubmit}
@@ -110,6 +106,11 @@ const Post = () => {
             placeholder="Submit"
           />
         </form>
+      ) : (
+        <div className="flex flex-col mt-10">
+          <p className="text-center">Please login in order to post your reviews</p>
+          <button className="bg-blue-500 mx-auto my-5 text-xl text-white hover:shadow-lg rounded-lg px-2 w-40 " onClick={signIn}>Login</button>
+        </div>
       )}
       <p className="text-center">
         <strong>Note</strong>: The reviews you post here will not automatically

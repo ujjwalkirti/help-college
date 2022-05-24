@@ -22,7 +22,7 @@ function Navbar() {
           href="/"
           className="mx-2 flex items-center font-bold text-3xl cursor-pointer"
         >
-          <img src="favicon.ico" className="h-12 mr-2" />
+          <img src="favicon.ico" className="h-12 w-12  rounded-full mr-2" />
           <p className="hidden md:flex">Helping you through!</p>
         </a>
         {!session ? (

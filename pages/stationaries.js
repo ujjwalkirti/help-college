@@ -24,11 +24,13 @@ function Stationaries() {
   const [progress, setProgress] = React.useState("");
   const [contactNumber, setContactNumber] = React.useState("");
   const [price, setPrice] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const { data: session } = useSession();
 
   //fetching all the stationaries uploaded for sale
   React.useEffect(() => {
+    setLoading(true);
     if (wantsToBuy) {
       if (productsList.length === 0) {
         axios
@@ -38,10 +40,10 @@ function Stationaries() {
             // console.log(response.data);
 
             if (response.data.length === 0) {
-              console.log("array is empty");
             } else {
               setProductList(response.data);
             }
+            setLoading(false);
           })
           .catch(function (error) {
             // handle error
@@ -268,12 +270,20 @@ function Stationaries() {
                   />
                 ))}
               </div>
-              {productsList.length === 0 && (
+              {productsList.length === 0 && !loading && (
                 <div className="mt-10">
                   <p className="text-2xl text-center italic w-screen">
                     Sorry, but the marketplace seems empty.
                   </p>
                   <img src="sold-out.jpg" className="h-36 w-36 mx-auto" />
+                </div>
+              )}
+              {loading && (
+                <div className="flex flex-col justify-center">
+                  <img
+                    src="spinner.jpg"
+                    className="rounded-full h-20 md:h-44 mt-10 mx-auto"
+                  />
                 </div>
               )}
             </div>
