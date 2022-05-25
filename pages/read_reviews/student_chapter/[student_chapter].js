@@ -53,15 +53,16 @@ const Post = () => {
   return (
     <div className="min-h-screen" style={backgroundStyle}>
       <Navbar />
-      <div className="flex flex-col p-4 md:flex-row md:w-3/5 mx-auto md:justify-between items-center">
-        <p className="md:text-5xl sm:text-3xl mb-4 italic font-bold text-white">
+      <div className="flex flex-col p-4 lg:flex-row md:w-3/5 mx-auto md:justify-between items-center">
+        <p className="md:text-4xl sm:text-3xl mb-4 italic font-bold text-white">
           {target_chapter.student_chapter_name}
         </p>
         <img src={target_chapter.student_chapter_image} className="h-72 w-72" />
       </div>
       {!noReviewsPresent ? (
-        <div>
+        <div className="pb-4">
           {reviews.map((review) => {
+
             return (
               <div className="md:w-3/5 mx-auto">
                 <ReadReview entity={review} type="student_chapter" />

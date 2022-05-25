@@ -2,7 +2,7 @@ import React from "react";
 
 function Card({ option }) {
   return (
-    <div className="border flex flex-col m-3 items-center p-2 rounded-md hover:shadow-lg h-40 justify-evenly">
+    <div className="border flex flex-col m-3 bg-white items-center p-2 rounded-md hover:shadow-lg h-40 justify-evenly">
       <p className="text-center font-bold italic text-xl">{option.name}</p>
       <p>{option.emoji}</p>
       <a

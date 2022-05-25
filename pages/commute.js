@@ -62,9 +62,9 @@ function Commute() {
     if (!regexExp.test(contactNumber)) {
       alert("please Enter a proper contact number!");
       setContactNumber("");
+    } else {
+      if (app) uploadFile(file);
     }
-
-    if (app) uploadFile(file);
   };
 
   function uploadFile(file) {

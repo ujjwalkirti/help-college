@@ -76,14 +76,14 @@ const MakeHostelReview = () => {
       <Navbar />
       <img
         src={target_hostel.hostel_image}
-        className="mx-auto rounded-lg mt-4 h-52 w-52"
+        className="mx-auto rounded-lg mt-4 h-52 md:w-52"
       />
       <p className="text-center text-2xl font-bold italic mt-4">
         {target_hostel.hostel_name}
       </p>
       {typeof session !== "undefined" && session?.user ? (
         <form
-          className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg"
+          className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg text-black mx-2" 
           onSubmit={handleSubmit}
         >
           <input
@@ -98,7 +98,7 @@ const MakeHostelReview = () => {
           />
           <textarea
             value={review}
-            className="p-2 m-2 md:w-3/5"
+            className="p-2 m-2 md:w-3/5 w-full"
             onChange={(e) => {
               setReview(e.target.value);
             }}
