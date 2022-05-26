@@ -83,7 +83,7 @@ const MakeHostelReview = () => {
       </p>
       {typeof session !== "undefined" && session?.user ? (
         <form
-          className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg text-black mx-2" 
+          className="flex flex-col md:w-3/5  items-center bg-gray-300 my-4 rounded-lg text-black mx-2 md:mx-auto"
           onSubmit={handleSubmit}
         >
           <input
