@@ -12,6 +12,7 @@ import { useSession, signIn } from "next-auth/react";
 import axios from "axios";
 import Stationary_Card from "../components/Stationary_Card";
 import Navbar from "../components/Navbar";
+import SuggestionBox from "../components/SuggestionBox";
 const { v4: uuidv4 } = require("uuid");
 
 function Stationaries() {
@@ -297,6 +298,7 @@ function Stationaries() {
               )}
             </div>
           )}
+          <SuggestionBox />
         </div>
       ) : (
         <div className="flex justify-center items-center h-screen">

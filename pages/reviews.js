@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import Navbar from "../components/Navbar";
 import ReviewsCard from "../components/ReviewsCard";
+import SuggestionBox from "../components/SuggestionBox";
 
 function Reviews() {
   const [studentChapters, setStudentChapters] = React.useState([]);
@@ -100,6 +101,7 @@ function Reviews() {
           })}
         </div>
       </div>
+      <SuggestionBox />
     </div>
   );
 }

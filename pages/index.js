@@ -5,6 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import react from "react";
 import { getAnalytics } from "firebase/analytics";
 import { app } from "../components/Firebase/Firebase";
+import SuggestionBox from "../components/SuggestionBox";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -34,6 +35,8 @@ export default function Home() {
           <p className="text-center">
             You are logged in as <strong>{session.user.name}</strong>
           </p>
+
+          <SuggestionBox />
         </div>
       )}
     </div>
