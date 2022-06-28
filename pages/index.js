@@ -6,6 +6,7 @@ import react from "react";
 import { getAnalytics } from "firebase/analytics";
 import { app } from "../components/Firebase/Firebase";
 import SuggestionBox from "../components/SuggestionBox";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -39,6 +40,7 @@ export default function Home() {
           <SuggestionBox />
         </div>
       )}
+      <Footer/>
     </div>
   );
 }
