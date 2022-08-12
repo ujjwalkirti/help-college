@@ -12,7 +12,7 @@ It also provides a review section where students and alumni can provide detailed
 
 **Client:** NextJS, TailwindCSS
 
-**Server:** Node
+**Server:** NodeJS
 
 **Database:** Firebase
 
