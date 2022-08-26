@@ -4,7 +4,7 @@ export default function handler(req, res) {
    { name: "Electronics Engineering", code: "ece" },
    { name: "Electrical Engineering", code: "ee" },
    { name: "Mechanical Engineering", code: "me" },
-   { name: "Civil Enigneering", code: "ce" },
+   { name: "Civil Engineering", code: "ce" },
    { name: "Chemical Engineering", code: "che" },
    { name: "Physics", code: "phy" },
    { name: "Mathematics", code: "math" },

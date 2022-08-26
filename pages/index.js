@@ -32,8 +32,8 @@ export default function Home() {
       <Functionalities />
 
       {session && (
-        <div className="mt-4">
-          <p className="text-center">
+        <div className="mt-2">
+          <p className="text-center text-white">
             You are logged in as <strong>{session.user.name}</strong>
           </p>
 

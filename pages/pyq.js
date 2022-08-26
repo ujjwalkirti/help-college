@@ -1,21 +1,39 @@
 import axios from "axios";
 import React from "react";
 import Navbar from "../components/Navbar";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../components/Firebase/Firebase";
 
 function Pyq() {
   const [subjects, setSubjects] = React.useState([]);
-  const [subject, setSubject] = React.useState("");
+  const [branches, setBranches] = React.useState([]);
   const [examType, setExamType] = React.useState("");
   const [error, setError] = React.useState("");
   const [years, setYears] = React.useState([]);
+  const [btechYear, setBtechYear] = React.useState("");
+  const [chosenSubject, setChosensubject] = React.useState("");
+  const [branch, setBranch] = React.useState({ name: "", code: "" });
   const [year, setYear] = React.useState("");
+  const [url, setUrl] = React.useState("");
+
+  const btech_years = [
+    "BTech I",
+    "BTech II",
+    "BTech III",
+    "BTech IV",
+    "MSc I",
+    "MSc II",
+    "MSc III",
+    "MSc IV",
+    "MSc V",
+  ];
 
   React.useEffect(() => {
     axios
-      .get("/api/getSubjects")
+      .get("/api/getBranches")
       .then((response) => {
         // console.log(response.data);
-        setSubjects(response.data);
+        setBranches(response.data);
       })
       .catch((error) => {
         alert("Something went wrong!");
@@ -38,7 +56,23 @@ function Pyq() {
         setError("");
       }
     }
-  }, [subject, examType, year]);
+  }, [branches, examType, year]);
+
+  React.useEffect(async () => {
+    if (branch.name != "" && btechYear != "") {
+      const docRef = doc(db, btechYear, branch.name);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        setSubjects(docSnap.data().data);
+      } else {
+        // doc.data() will be undefined in this case
+        setSubjects(["No data available!"]);
+        // console.log("No such document!");
+      }
+    }
+  }, [branch, btechYear]);
 
   const buttonStyle =
     "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2 cursor-pointer hover:shadow-lg";
@@ -46,22 +80,28 @@ function Pyq() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(e.target[2].checked);
+    setYear(e.target[0].value);
+    // setBtechYear(e.target[1].value);
+    setChosensubject(e.target[5].value);
 
-    // console.log(e.target[0].value);
-
-    setSubject(e.target[0].value);
-
-    setYear(e.target[3].value);
-
-    if (e.target[1].checked) {
+    if (e.target[3].checked) {
       setExamType("end-sem");
-    } else if (e.target[2].checked) {
+    } else if (e.target[4].checked) {
       setExamType("mid-sem");
     } else {
       setError("You have not selected any exam type!");
     }
+
+    const object = {
+      year: year,
+      btech_year: btechYear,
+      branch: branch,
+      exam: examType,
+      sub: chosenSubject,
+      url: url,
+    };
   };
+
   const description =
     "You will get all the previous year question papers of mid semester and end semester examinations for all the branches here!";
 
@@ -73,78 +113,114 @@ function Pyq() {
 
   return (
     <div style={backgroundStyle} className="min-h-screen">
-      <Navbar />{" "}
-      <p className="font-bold text-2xl text-center">
-        This page is under construction, sorry for the inconvenience!
+      <Navbar />
+      <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-10">
+        "{description}"
       </p>
-      <img
-        className="w-3/5 md:w-72 md:mt-10  object-contain mx-auto"
-        src="maintainenance.jpg"
-      />
+      <div className="md:w-2/5 mx-auto">
+        {error !== "" && (
+          <div className="text-red-600 flex justify-center items-center p-2 m-2 rounded-md font-semibold bg-red-300 relative">
+            {error}
+            <p
+              className="text-white border border-white rounded-full mr-2 flex items-center justify-center absolute right-0 h-8 text-center w-8 cursor-pointer hover:shadow-lg"
+              onClick={() => {
+                setError("");
+              }}
+            >
+              X
+            </p>
+          </div>
+        )}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center border border-black p-2 m-2"
+        >
+          <label for="year">Please select academic year:</label>
+          <select id="year" className="border border-black p-2 m-2">
+            {years.map((year) => {
+              return <option>{year}</option>;
+            })}
+          </select>
+
+          <label for="year" className="flex">
+            Select your year:
+            <p className="ml-2 text-red-700">
+              As in BTech 1<sup>st</sup>, BTech 2<sup>nd</sup> etc.
+            </p>
+          </label>
+          <select
+            onClick={(e) => {
+              setBtechYear(e.target.value);
+            }}
+            id="year"
+            className="border border-black p-2 m-2"
+          >
+            {btech_years.map((year) => {
+              return <option>{year}</option>;
+            })}
+          </select>
+
+          <label for="branch">Please select your branch:</label>
+          <select
+            onClick={(e) => {
+              branches.map((branch) => {
+                if (branch.name === e.target.value) {
+                  const localObject = {
+                    name: branch.name,
+                    code: branch.code,
+                  };
+                  setBranch(localObject);
+                }
+              });
+            }}
+            id="branch"
+            className="border border-black p-2 m-2"
+          >
+            {branches.map((branch) => {
+              return <option>{branch.name}</option>;
+            })}
+          </select>
+
+          <div className="flex flex-col items-center">
+            <label>Mid-sem or End-sem?</label>
+
+            <div className="border border-black p-2 m-2">
+              <input
+                type="radio"
+                id="end-sem"
+                name="fav_language"
+                value="end-sem"
+              />
+              <label for="end-sem">End Semester</label> {" "}
+              <input
+                type="radio"
+                id="mid-sem"
+                name="fav_language"
+                value="mid-sem"
+              />
+              <label for="css">Mid Semester</label>
+            </div>
+          </div>
+          <label>Select subject:</label>
+          {subjects.length != 0 && (
+            <select className="border border-black p-2 m-2">
+              {subjects.map((subject) => {
+                return <option>{subject}</option>;
+              })}
+            </select>
+          )}
+
+          <input type="submit" className={buttonStyle} />
+        </form>
+      </div>
+      <p>
+        <strong>Note</strong> : If you guys know subjects that are missing,
+        please help in making it correct.
+        <br />
+        Add them <a href="/admin/add-subjects-to-branches">here</a>
+      </p>
     </div>
   );
-
-  // return (
-  //   <div>
-  //     <Navbar />
-  //     <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-10">
-  //       "{description}"
-  //     </p>
-  //     <div className="md:w-2/5 mx-auto">
-  //       {error !== "" && (
-  //         <div className="text-red-600 flex justify-center items-center p-2 m-2 rounded-md font-semibold bg-red-300 relative">
-  //           {error}
-  //           <p
-  //             className="text-white border border-white rounded-full mr-2 flex items-center justify-center absolute right-0 h-8 text-center w-8 cursor-pointer hover:shadow-lg"
-  //             onClick={() => {
-  //               setError("");
-  //             }}
-  //           >
-  //             X
-  //           </p>
-  //         </div>
-  //       )}
-  //       <form
-  //         onSubmit={handleSubmit}
-  //         className="flex flex-col items-center border border-black p-2 m-2"
-  //       >
-  //         <label for="subject">Please select your branch:</label>
-  //         <select id="subject" className="border border-black p-2 m-2">
-  //           {subjects.map((subject) => {
-  //             return <option>{subject.name}</option>;
-  //           })}
-  //         </select>
-  //         <div className="flex flex-col items-center">
-  //           <label>Mid-sem or End-sem?</label>
-
-  //           <div className="border border-black p-2 m-2">
-  //             <input
-  //               type="radio"
-  //               id="end-sem"
-  //               name="fav_language"
-  //               value="end-sem"
-  //             />
-  //             <label for="end-sem">End Semester</label> {" "}
-  //             <input
-  //               type="radio"
-  //               id="mid-sem"
-  //               name="fav_language"
-  //               value="mid-sem"
-  //             />
-  //             <label for="css">Mid Semester</label>
-  //           </div>
-  //         </div>
-  //         <label for="year">Please select academic year:</label>
-  //         <select id="year" className="border border-black p-2 m-2">
-  //           {years.map((year) => {
-  //             return <option>{year}</option>;
-  //           })}
-  //         </select>
-  //         <input type="submit" className={buttonStyle} />
-  //       </form>
-  //     </div>
-  //   </div>
-  // );
 }
 
 export default Pyq;
