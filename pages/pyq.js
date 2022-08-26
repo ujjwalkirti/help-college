@@ -114,10 +114,10 @@ function Pyq() {
   return (
     <div style={backgroundStyle} className="min-h-screen">
       <Navbar />
-      <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-10">
+      <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-10 md:mb-3">
         "{description}"
       </p>
-      <div className="md:w-2/5 mx-auto">
+      <div className="md:w-3/5 mx-auto">
         {error !== "" && (
           <div className="text-red-600 flex justify-center items-center p-2 m-2 rounded-md font-semibold bg-red-300 relative">
             {error}
@@ -201,23 +201,33 @@ function Pyq() {
               <label for="css">Mid Semester</label>
             </div>
           </div>
-          <label>Select subject:</label>
+
           {subjects.length != 0 && (
-            <select className="border border-black p-2 m-2">
-              {subjects.map((subject) => {
-                return <option>{subject}</option>;
-              })}
-            </select>
+            <div className="flex flex-col">
+              <label className="text-center">Finally select your subject:</label>
+              <select className="border border-black p-2 m-2">
+                {subjects.map((subject) => {
+                  return <option>{subject}</option>;
+                })}
+              </select>
+            </div>
           )}
 
           <input type="submit" className={buttonStyle} />
         </form>
       </div>
-      <p>
+      <p className="text-center bg-white text-lg">
         <strong>Note</strong> : If you guys know subjects that are missing,
         please help in making it correct.
         <br />
-        Add them <a href="/admin/add-subjects-to-branches">here</a>
+        Add them{" "}
+        <a
+          href="/admin/add-subjects-to-branches"
+          className="text-blue-600 hover:underline cusrsor-pointer"
+        >
+          here
+        </a>
+        !
       </p>
     </div>
   );
