@@ -15,32 +15,32 @@ export default function handler(req, res) {
             {
               name: "Previous Year Questions",
               url: "/pyq",
-              backgroundImg: "",
+              backgroundImg: "/functionalities/pyqs.jpeg",
               emoji: "❓",
             },
             {
               name: "Academic Calender",
               description: "Academic calender for the academic year 2021-22",
-              backgroundImg: "",
+              backgroundImg: "/functionalities/calender.webp",
               url: calender_url,
               emoji: "📆",
             },
             {
               name: "Old Books and other Stationaries for sale",
               emoji: "📚",
-              backgroundImg: "",
+              backgroundImg: "/functionalities/books.jpg",
               url: "/stationaries",
             },
             {
               name: "Vehicles for sale",
               emoji: "🏍️",
-              backgroundImg: "",
+              backgroundImg: "/functionalities/bike.jpg",
               url: "/commute",
             },
             {
               name: "Hostel and Student chapter reviews",
               emoji: "🏨",
-              backgroundImg: "",
+              backgroundImg: "/functionalities/dorm.jpg",
               url: "/reviews",
             },
           ];
