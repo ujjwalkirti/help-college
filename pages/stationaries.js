@@ -130,15 +130,15 @@ function Stationaries() {
   const buttonStyle =
     "bg-blue-500 mx-auto p-2 rounded-sm text-white font-bold mt-2";
 
-  const backgroundStyle = {
-    backgroundImage: "url('wallpapers/3.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-  };
+  // const backgroundStyle = {
+  //   backgroundImage: "url('wallpapers/3.jpg')",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundAttachment: "fixed",
+  // };
 
   return (
-    <div className="min-h-screen" style={backgroundStyle}>
+    <div className="min-h-screen bg-gradient-to-br from-red-400 to-yellow-300">
       <Navbar />
       <p className="italic text-black text-2xl md:text-4xl text-center font-bold md:w-3/5 mx-auto mb-2">
         "{descriptionOfPage}"

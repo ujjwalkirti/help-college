@@ -34,7 +34,7 @@ const Suggestions = () => {
       });
   };
   return (
-    <div className="bg-gradient-to-br min-h-screen from-red-500 via-yellow-500 to-yellow-300">
+    <div className=" min-h-screen bg-gradient-to-br from-red-400 to-yellow-300">
       <Navbar />
       {loading && (
         <div className="absolute min-h-screen bg-opacity-70 flex justify-center items-center bg-slate-600 min-w-full">

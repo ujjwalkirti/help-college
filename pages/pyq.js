@@ -105,14 +105,14 @@ function Pyq() {
   const description =
     "You will get all the previous year question papers of mid semester and end semester examinations for all the branches here!";
 
-  const backgroundStyle = {
-    backgroundImage: "url('wallpapers/2.webp')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-  };
+  // const backgroundStyle = {
+  //   backgroundImage: "url('wallpapers/2.webp')",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  // };
 
   return (
-    <div style={backgroundStyle} className="min-h-screen">
+    <div className="bg-gradient-to-br from-red-400 to-yellow-300 min-h-screen">
       <Navbar />
       <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-10 md:mb-3">
         "{description}"
@@ -204,7 +204,9 @@ function Pyq() {
 
           {subjects.length != 0 && (
             <div className="flex flex-col">
-              <label className="text-center">Finally select your subject:</label>
+              <label className="text-center">
+                Finally select your subject:
+              </label>
               <select className="border border-black p-2 m-2">
                 {subjects.map((subject) => {
                   return <option>{subject}</option>;

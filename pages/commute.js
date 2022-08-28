@@ -129,15 +129,15 @@ function Commute() {
   const descriptionOfPage =
     "Are you looking forward to sell your bike, or buy a new one? Then this is the perfect place for you!";
 
-  const backgroundStyle = {
-    backgroundImage: "url('wallpapers/4.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-  };
+  // const backgroundStyle = {
+  //   backgroundImage: "url('wallpapers/4.jpg')",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundAttachment: "fixed",
+  // };
 
   return (
-    <div style={backgroundStyle} className="min-h-screen">
+    <div className="bg-gradient-to-br from-red-400 to-yellow-300 min-h-screen">
       <Navbar />
       <p className="italic text-2xl text-white text-center font-bold p-2 md:w-3/5 mx-auto ">
         "{descriptionOfPage}"
