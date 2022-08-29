@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
+
 function Card({ option }) {
   return (
     <a

@@ -298,7 +298,7 @@ function Commute() {
           <SuggestionBox />
         </div>
       ) : (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center">
           <button onClick={signIn} className={buttonStyle}>
             Login
           </button>

@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../components/Firebase/Firebase";
+import Head from "next/head";
 
 function Pyq() {
   const [subjects, setSubjects] = React.useState([]);
@@ -113,6 +114,9 @@ function Pyq() {
 
   return (
     <div className="bg-gradient-to-br from-red-400 to-yellow-300 min-h-screen">
+      <Head>
+        <title>Previous Year Question Papers</title>
+      </Head>
       <Navbar />
       <p className="italic text-2xl text-center font-bold md:w-3/5 mx-auto mb-10 md:mb-3">
         "{description}"

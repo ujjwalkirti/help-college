@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Post = () => {
   const { data: session } = useSession();
@@ -65,26 +66,29 @@ const Post = () => {
         alert(e.message);
       });
   };
-  const backgroundStyle = {
-    backgroundImage: "url('../../wallpapers/8.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-  };
+  // const backgroundStyle = {
+  //   backgroundImage: "url('../../wallpapers/8.jpg')",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundAttachment: "fixed",
+  // };
 
   return (
-    <div className="min-h-screen" style={backgroundStyle}>
+    <div className="min-h-screen">
       <Navbar />
-      <img
-        src={target_chapter.student_chapter_image}
-        className="mx-auto rounded-lg mt-4 h-52 w-52"
-      />
+      <div className="flex justify-center mt-4">
+        <Image
+          width={300}
+          height={250}
+          src={target_chapter.student_chapter_image}
+        />
+      </div>
       <p className="text-center text-2xl text-white font-bold italic mt-4">
         {target_chapter.student_chapter_name}
       </p>
       {typeof session !== "undefined" && session?.user ? (
         <form
-          className="flex flex-col md:w-3/5 mx-auto items-center bg-gray-300 my-4 rounded-lg"
+          className="flex flex-col bg-gradient-to-br from-red-300 to-yellow-400 mx-1 px-2 md:w-3/5 md:mx-auto items-center my-4 rounded-lg"
           onSubmit={handleSubmit}
         >
           <input
@@ -108,20 +112,27 @@ const Post = () => {
           ></textarea>
           <input
             type="submit"
-            className="m-2 border border-black p-2 text-xl font-bold cursor-pointer hover:bg-black hover:text-white"
+            className="bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-5 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110"
             placeholder="Submit"
           />
         </form>
       ) : (
-        <div className="flex flex-col mt-10 bg-gray-300 md:w-2/5 md:mx-auto mb-4 mx-4 p-2 rounded-lg">
-          <p className="text-center text-2xl">Please login in order to post your reviews</p>
-          <button className="bg-blue-500 mx-auto my-5 text-xl text-white hover:shadow-lg rounded-lg px-2 w-40 " onClick={signIn}>Login</button>
+        <div className="flex flex-col mt-10 md:w-2/5 md:mx-auto mb-4 mx-4 p-2 rounded-lg">
+          <p className="text-center text-4xl font-semibold animate-pulse">
+            Please login in order to post your reviews
+          </p>
+          <button
+            className="bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-5 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110"
+            onClick={signIn}
+          >
+            Login
+          </button>
         </div>
       )}
-      <p className="text-center text-white font-semibold text-2xl">
-        <strong>Note</strong>: The reviews you post here will not automatically
-        be posted, rather it will be checked for authenticity of claims and
-        other relevant factors by authorities.{" "}
+      <p className="text-center font-semibold text-2xl">
+        <strong>Note</strong>: The reviews you post here will be automatically
+        be posted, however it will be checked for authenticity of claims and
+        other relevant factors by authorities later on.{" "}
       </p>
     </div>
   );

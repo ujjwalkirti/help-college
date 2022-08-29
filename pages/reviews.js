@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import React from "react";
 import Navbar from "../components/Navbar";
 import ReviewsCard from "../components/ReviewsCard";
@@ -43,7 +44,7 @@ function Reviews() {
   }, []);
 
   const divStyle =
-    "md:w-4/5 mx-auto grid md:grid-cols-3 xl:grid-cols-4 grid-cols-1";
+    "md:w-4/5 mx-auto grid md:grid-cols-2 grid-cols-1";
   const noDivStyle = "hidden";
 
   const selectedButtonStyle = "w-1/2 bg-black md:text-2xl text-white p-2 font-bold border";
@@ -60,6 +61,9 @@ function Reviews() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-400 to-yellow-300">
+      <Head>
+        <title>Hostel and Student Chapter Reviews</title>
+      </Head>
       <Navbar />
       <p className="italic text-2xl bg-white my-2 p-2 text-center font-bold w-4/5 mx-auto rounded-xl">
         "{description}"

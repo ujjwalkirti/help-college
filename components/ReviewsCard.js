@@ -1,15 +1,22 @@
+import Image from "next/image";
 import React from "react";
 
 function ReviewsCard({ entity, type }) {
   const buttonStyle =
-    "bg-blue-500 text-white text-center font-semibold rounded-md hover:bg-white hover:text-blue-500 p-2 mt-2 border border-blue-500";
+    "bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto mt-2 text-2xl text-white hover:shadow-lg rounded-lg px-2 py-3 transition ease-in-out delay-110 hover:text-white hover:bg-red-500 hover:scale-110";
   if (type === "dormitories") {
     return (
       <div className="p-4 bg-white rounded-xl m-3">
+       
         <h1 className="text-center font-bold text-2xl mb-3">
           {entity.hostel_name}
         </h1>
-        <img src={entity.hostel_image} className="mx-auto h-72" />
+        <Image
+          height={300}
+          width={400}
+          layout="responsive"
+          src={entity.hostel_image}
+        />
         <div className="flex flex-col">
           <a
             href={`/read_reviews/hostel/${entity.hostel_code}`}
@@ -32,7 +39,12 @@ function ReviewsCard({ entity, type }) {
         <h1 className="text-center font-bold text-2xl mb-3">
           {entity.student_chapter_name}
         </h1>
-        <img src={entity.student_chapter_image} className="mx-auto h-72" />
+        <Image
+          height={300}
+          width={400}
+          layout="responsive"
+          src={entity.student_chapter_image}
+        />
         <div className="flex flex-col">
           <a
             href={`/read_reviews/student_chapter/${entity.student_chapter_code}`}
