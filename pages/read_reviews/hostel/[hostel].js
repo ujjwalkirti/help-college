@@ -4,6 +4,7 @@ import Navbar from "../../../components/Navbar";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
 import ReadReview from "../../../components/ReadReview";
+import Image from "next/image";
 
 const MakeHostelReview = () => {
   const [reviews, setReviews] = react.useState([]);
@@ -38,22 +39,21 @@ const MakeHostelReview = () => {
       });
     }
   }, [hostel]);
-  const backgroundStyle = {
-    backgroundImage: "url('../../wallpapers/9.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-  };
 
   return (
-    <div className="min-h-screen text-white" style={backgroundStyle}>
+    <div className="min-h-screen">
       {" "}
       <Navbar />
-      <div className="flex flex-col p-4 md:flex-row md:w-3/5 mx-auto md:justify-between items-center">
-        <p className="md:text-5xl sm:text-3xl mb-4 italic font-bold">
+      <div className="flex md:w-3/5 mx-auto items-center justify-center">
+        <p className="md:text-5xl md:absolute z-30 md:text-red-500 px-2 py-1 rounded-sm text-2xl bg-white font-bold">
           {target_hostel.hostel_name}
         </p>
-        <img src={target_hostel.hostel_image} className="h-72 w-72" />
+        <Image
+          width={1000}
+          height={500}
+          layout="intrinsic"
+          src={target_hostel.hostel_image}
+        />
       </div>
       {!noReviewsPresent ? (
         <div>
@@ -68,8 +68,8 @@ const MakeHostelReview = () => {
       ) : (
         <div className="">
           {" "}
-          <p className="text-center md:text-2xl">
-            sorry no reviews have been made! 📜
+          <p className="text-center text-2xl md:text-4xl">
+            sorry no reviews have been made, yet! 📜
           </p>
         </div>
       )}

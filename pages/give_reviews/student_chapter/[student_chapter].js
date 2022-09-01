@@ -73,6 +73,9 @@ const Post = () => {
   //   backgroundAttachment: "fixed",
   // };
 
+  const buttonStyle =
+    "bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-5 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110";
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -112,7 +115,7 @@ const Post = () => {
           ></textarea>
           <input
             type="submit"
-            className="bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-5 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110"
+            className={buttonStyle}
             placeholder="Submit"
           />
         </form>
@@ -122,7 +125,7 @@ const Post = () => {
             Please login in order to post your reviews
           </p>
           <button
-            className="bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-5 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110"
+            className={buttonStyle}
             onClick={signIn}
           >
             Login

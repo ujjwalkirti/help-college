@@ -8,7 +8,7 @@ function ReviewsCard({ entity, type }) {
     return (
       <div className="p-4 bg-white rounded-xl m-3">
        
-        <h1 className="text-center font-bold text-2xl mb-3">
+        <h1 className="text-center font-bold h-10 text-2xl mb-3">
           {entity.hostel_name}
         </h1>
         <Image
@@ -17,7 +17,7 @@ function ReviewsCard({ entity, type }) {
           layout="responsive"
           src={entity.hostel_image}
         />
-        <div className="flex flex-col">
+        <div className="flex justify-center">
           <a
             href={`/read_reviews/hostel/${entity.hostel_code}`}
             className={buttonStyle}
@@ -36,7 +36,7 @@ function ReviewsCard({ entity, type }) {
   } else {
     return (
       <div className="p-4 bg-white rounded-xl m-3">
-        <h1 className="text-center font-bold text-2xl mb-3">
+        <h1 className="text-center h-20 font-bold text-2xl mb-3">
           {entity.student_chapter_name}
         </h1>
         <Image
@@ -45,7 +45,7 @@ function ReviewsCard({ entity, type }) {
           layout="responsive"
           src={entity.student_chapter_image}
         />
-        <div className="flex flex-col">
+        <div className="flex justify-center">
           <a
             href={`/read_reviews/student_chapter/${entity.student_chapter_code}`}
             className={buttonStyle}
