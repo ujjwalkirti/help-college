@@ -28,15 +28,9 @@ const StationaryInfo = () => {
       }
     }
   }, [id, entity]);
-  const backgroundStyle = {
-    backgroundImage: "url('../../wallpapers/7.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-  };
 
   return (
-    <div className="min-h-screen" style={backgroundStyle}>
+    <div className="min-h-screen">
       <Navbar />
 
       <div className="w-3/5 h-full bg-white rounded-xl mx-auto m-4 flex flex-col md:flex-row">

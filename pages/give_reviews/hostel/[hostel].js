@@ -29,13 +29,13 @@ const MakeHostelReview = () => {
     const reviewsRef = collection(db, "hostel");
     if (hostel) {
       const q = query(reviewsRef, where("hostel_code", "==", hostel));
-      
+
       onSnapshot(q, (snapshot) => {
         let shots = [];
         snapshot.docs.forEach((doc) => {
           shots.push({ ...doc.data(), id: doc.id });
         });
-        
+
         setTarget_hostel(shots[0]);
       });
     }
@@ -106,11 +106,11 @@ const MakeHostelReview = () => {
               setName(e.target.value);
             }}
             required
-            className="p-2 m-2 border-none md:w-4/5"
+            className="p-2 m-2 border-none w-full sm:w-4/5"
           />
           <textarea
             value={review}
-            className="p-2 m-2 md:w-4/5 w-full"
+            className="p-2 m-2 md:w-4/5 sm:w-4/5 w-full"
             onChange={(e) => {
               setReview(e.target.value);
             }}
