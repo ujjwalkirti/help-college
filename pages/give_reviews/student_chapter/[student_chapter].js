@@ -11,6 +11,7 @@ import {
 import { db } from "../../../components/Firebase/Firebase";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import Head from "next/head";
 
 const Post = () => {
   const { data: session } = useSession();
@@ -74,10 +75,13 @@ const Post = () => {
   // };
 
   const buttonStyle =
-    "bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-5 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110";
+    "bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-1 text-3xl text-white hover:shadow-lg rounded-lg px-2 py-3 w-40 transition ease-in-out delay-150 hover:scale-110 cursor-pointer hover:bg-red-500 hover:text-white";
 
   return (
     <div className="min-h-screen">
+      <Head>
+        <title>Give reviews - {target_chapter.student_chapter_name}</title>
+      </Head>
       <Navbar />
       <div className="flex justify-center mt-4">
         <Image
@@ -102,32 +106,25 @@ const Post = () => {
               setName(e.target.value);
             }}
             required
-            className="p-2 m-2 border-none md:w-3/5"
+            className="p-2 m-2 border-none md:w-4/5"
           />
           <textarea
             value={review}
-            className="p-2 m-2 w-full md:w-3/5"
+            className="p-2 m-2 w-full md:w-4/5"
             onChange={(e) => {
               setReview(e.target.value);
             }}
             placeholder={`What do you have to say about ${target_chapter.student_chapter_name}`}
             required
           ></textarea>
-          <input
-            type="submit"
-            className={buttonStyle}
-            placeholder="Submit"
-          />
+          <input type="submit" className={buttonStyle} placeholder="Submit" />
         </form>
       ) : (
         <div className="flex flex-col mt-10 md:w-2/5 md:mx-auto mb-4 mx-4 p-2 rounded-lg">
           <p className="text-center text-4xl font-semibold animate-pulse">
             Please login in order to post your reviews
           </p>
-          <button
-            className={buttonStyle}
-            onClick={signIn}
-          >
+          <button className={buttonStyle} onClick={signIn}>
             Login
           </button>
         </div>

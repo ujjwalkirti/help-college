@@ -5,6 +5,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
 import ReadReview from "../../../components/ReadReview";
 import Image from "next/image";
+import Head from "next/head";
 
 const MakeHostelReview = () => {
   const [reviews, setReviews] = react.useState([]);
@@ -42,10 +43,12 @@ const MakeHostelReview = () => {
 
   return (
     <div className="min-h-screen">
-      {" "}
+      <Head>
+        <title>Read reviews - {target_hostel.hostel_name}</title>
+      </Head>{" "}
       <Navbar />
-      <div className="flex md:w-3/5 mx-auto items-center justify-center">
-        <p className="md:text-5xl md:absolute z-30 md:text-red-500 px-2 py-1 rounded-sm text-2xl bg-white font-bold">
+      <div className="flex flex-col md:w-3/5 mx-auto md:mt-2 items-center justify-center">
+        <p className="md:text-5xl md:absolute z-30  md:text-red-500 px-2 py-1 rounded-sm text-2xl bg-white font-bold">
           {target_hostel.hostel_name}
         </p>
         <Image

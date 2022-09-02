@@ -10,6 +10,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
+import Head from "next/head";
 
 const MakeHostelReview = () => {
   const { data: session } = useSession();
@@ -21,18 +23,19 @@ const MakeHostelReview = () => {
   const router = useRouter();
 
   const { hostel } = router.query;
+  console.log(router);
 
   react.useEffect(() => {
     const reviewsRef = collection(db, "hostel");
     if (hostel) {
       const q = query(reviewsRef, where("hostel_code", "==", hostel));
-      console.log(q);
+      
       onSnapshot(q, (snapshot) => {
         let shots = [];
         snapshot.docs.forEach((doc) => {
           shots.push({ ...doc.data(), id: doc.id });
         });
-        console.log(shots);
+        
         setTarget_hostel(shots[0]);
       });
     }
@@ -63,27 +66,36 @@ const MakeHostelReview = () => {
       });
   };
 
-    const backgroundStyle = {
-      backgroundImage: "url('../../wallpapers/6.jpg')",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundAttachment: "fixed",
-    };
+  // const backgroundStyle = {
+  //   backgroundImage: "url('../../wallpapers/6.jpg')",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundAttachment: "fixed",
+  // };
 
+  const buttonStyle =
+    "bg-white border border-red-500 hover:shadow-lg text-red-500 font-bold mx-auto my-2 text-3xl text-white hover:shadow-lg rounded-lg px-1 py-2 w-40 transition ease-in-out delay-150 hover:scale-110 hover:bg-red-500 hover:text-white cursor-pointer";
 
   return (
-    <div className="min-h-screen text-white" style={backgroundStyle}>
+    <div className="min-h-screen">
+      <Head>
+        <title>Give reviews - {target_hostel.hostel_name}</title>
+      </Head>
       <Navbar />
-      <img
-        src={target_hostel.hostel_image}
-        className="mx-auto rounded-lg mt-4 h-52 md:w-52"
-      />
-      <p className="text-center text-2xl font-bold italic mt-4">
-        {target_hostel.hostel_name}
-      </p>
+      <div className="flex flex-col md:w-3/5 mx-auto md:mt-2 items-center px-2 justify-center">
+        <p className="lg:text-5xl md:absolute z-30 text-xl  md:text-red-500 px-2 py-1 rounded-sm md:text-2xl bg-white font-bold">
+          {target_hostel.hostel_name}
+        </p>
+        <Image
+          width={1000}
+          height={500}
+          layout="intrinsic"
+          src={target_hostel.hostel_image}
+        />
+      </div>
       {typeof session !== "undefined" && session?.user ? (
         <form
-          className="flex flex-col md:w-3/5  items-center bg-gray-300 my-4 rounded-lg text-black mx-2 md:mx-auto"
+          className="flex flex-col  bg-gradient-to-br from-red-300 to-yellow-400 mx-1 px-2 md:w-3/5 md:mx-auto items-center my-4 rounded-lg"
           onSubmit={handleSubmit}
         >
           <input
@@ -94,40 +106,33 @@ const MakeHostelReview = () => {
               setName(e.target.value);
             }}
             required
-            className="p-2 m-2 border-none md:w-3/5"
+            className="p-2 m-2 border-none md:w-4/5"
           />
           <textarea
             value={review}
-            className="p-2 m-2 md:w-3/5 w-full"
+            className="p-2 m-2 md:w-4/5 w-full"
             onChange={(e) => {
               setReview(e.target.value);
             }}
             placeholder={`What do you have to say about ${target_hostel.hostel_name}`}
             required
           ></textarea>
-          <input
-            type="submit"
-            className="m-2 border border-black p-2 text-xl font-bold cursor-pointer hover:bg-black hover:text-white"
-            placeholder="Submit"
-          />
+          <input type="submit" className={buttonStyle} placeholder="Submit" />
         </form>
       ) : (
-        <div className="flex flex-col mt-10 bg-gray-300 md:w-2/5 md:mx-auto mb-4 mx-4 p-2 rounded-lg">
-          <p className="text-center text-2xl">
+        <div className="flex flex-col  md:w-2/5 md:mx-auto mx-4 p-2 rounded-lg">
+          <p className="text-center text-3xl font-semibold animate-pulse">
             Please login in order to post your reviews
           </p>
-          <button
-            className="bg-blue-500 mx-auto my-5 text-xl text-white hover:shadow-lg rounded-lg px-2 w-40 "
-            onClick={signIn}
-          >
+          <button className={buttonStyle} onClick={signIn}>
             Login
           </button>
         </div>
       )}
-      <p className="text-center">
-        <strong>Note</strong>: The reviews you post here will not automatically
-        be posted, rather it will be checked for authenticity of claims and
-        other relevant factors by authorities.{" "}
+      <p className="text-center font-semibold text-2xl">
+        <strong>Note</strong>: The reviews you post here will be automatically
+        be posted, however it will be checked for authenticity of claims and
+        other relevant factors by authorities later on.{" "}
       </p>
     </div>
   );

@@ -4,6 +4,8 @@ import Navbar from "../../../components/Navbar";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../components/Firebase/Firebase";
 import ReadReview from "../../../components/ReadReview";
+import Image from "next/image";
+import Head from "next/head";
 
 const Post = () => {
   const [reviews, setReviews] = react.useState([]);
@@ -42,27 +44,29 @@ const Post = () => {
       });
     }
   }, [student_chapter]);
-  const backgroundStyle = {
-    backgroundImage: "url('../../wallpapers/9.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-  };
-
+  // const backgroundStyle = {
+  //   backgroundImage: "url('../../wallpapers/9.jpg')",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundAttachment: "fixed",
+  // };
 
   return (
-    <div className="min-h-screen" style={backgroundStyle}>
+    <div className="min-h-screen">
+      <Head>
+        <title>Read reviews - {target_chapter.student_chapter_name}</title>
+      </Head>
       <Navbar />
-      <div className="flex flex-col p-4 lg:flex-row md:w-3/5 mx-auto md:justify-between items-center">
-        <p className="md:text-4xl sm:text-3xl mb-4 italic font-bold text-white">
-          {target_chapter.student_chapter_name}
-        </p>
-        <img src={target_chapter.student_chapter_image} className="h-72 w-72" />
+      <div className="flex justify-center mt-4">
+        <Image
+          width={300}
+          height={250}
+          src={target_chapter.student_chapter_image}
+        />
       </div>
       {!noReviewsPresent ? (
         <div className="pb-4">
           {reviews.map((review) => {
-
             return (
               <div className="md:w-3/5 mx-auto">
                 <ReadReview entity={review} type="student_chapter" />
